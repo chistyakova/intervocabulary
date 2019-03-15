@@ -29,7 +29,11 @@ Rectangle {
                 color: "#00ffff"
                 Text {
                     id: currentWord
-                    text: controller.tileSize
+                    text:  {
+                        var word = controller.getNextWord()
+                        word.native+"<br>"+word.transcribtion+"<br>"+word.translation
+                    }
+                    //text: controller.tileSize
                     font.pointSize: 20
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
@@ -37,8 +41,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        currentWord.text = Math.random()
-                        currentWord.text = controller.getNextWord()
+                        Math.random()
                     }
                 }
             }

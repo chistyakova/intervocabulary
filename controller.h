@@ -2,6 +2,9 @@
 #define CONTROLLER_H
 
 #include <QObject>
+#include <QVariant>
+
+#include "word.h"
 
 class Controller : public QObject
 {
@@ -9,7 +12,7 @@ class Controller : public QObject
     Q_PROPERTY(int tileSize READ getTileSize NOTIFY tileSizeChanged)
 public:
     explicit Controller(QObject *parent = nullptr);
-    Q_INVOKABLE QString getNextWord();
+    Q_INVOKABLE QVariantMap getNextWord();
     int getTileSize();
 private:
     int tile_size_;

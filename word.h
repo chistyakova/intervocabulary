@@ -1,17 +1,15 @@
 #ifndef WORD_H
 #define WORD_H
 
-#include <QObject>
+#include <QString>
 
-class Word : public QObject
+class Word
 {
-    Q_OBJECT
 public:
-    explicit Word(QObject *parent = nullptr);
-
-signals:
-
-public slots:
+    explicit Word();
+    QString native_;
+    QString translation_;
+    QString transcribtion_;
 };
 
 #endif // WORD_H

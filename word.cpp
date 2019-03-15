@@ -1,6 +1,8 @@
 #include "word.h"
 
-Word::Word(QObject *parent) : QObject(parent)
+Word::Word()
 {
-
+    native_ = "словарь";
+    translation_ = "vocabulary";
+    transcribtion_ = "vokǽbjəlɛ̀ri";
 }

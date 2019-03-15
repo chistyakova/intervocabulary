@@ -4,11 +4,13 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    controller.cpp
+    controller.cpp \
+    word.cpp
 
 HEADERS += \
     controller.h \
-    helpers.h
+    helpers.h \
+    word.h
 
 RESOURCES += \
     resources.qrc
