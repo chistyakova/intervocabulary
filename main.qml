@@ -29,7 +29,7 @@ Rectangle {
                 color: "#00ffff"
                 Text {
                     id: currentWord
-                    text: "Click to start"
+                    text: controller.tileSize
                     font.pointSize: 20
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter

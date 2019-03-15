@@ -1,11 +1,5 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>watermelon.svg</file>
-        <file>add.svg</file>
-        <file>settings.svg</file>
-        <file>help.svg</file>
-        <file>AddTable.qml</file>
-        <file>ChooseIcon.qml</file>
     </qresource>
 </RCC>

@@ -17,9 +17,6 @@ int main(int argc, char *argv[])
     Controller *controller = new Controller();
     QQmlContext *ctxt = view.rootContext();
     ctxt->setContextProperty("controller", controller);
-    ctxt->setContextProperty("groupsModel", controller->groupsModel);
-    ctxt->setContextProperty("tableModel", controller->tableModel);
-    ctxt->setContextProperty("iconsModel", controller->iconsModel);
 
     view.setSource(QUrl("qrc:/main.qml"));
     view.show();
