@@ -6,12 +6,6 @@
 #include <QVector>
 #include <QtSql>
 
-#include "rawtable.h"
-#include "rawitem.h"
-#include "rawgroup.h"
-#include "groupsmodel.h"
-#include "tablemodel.h"
-
 class Controller : public QObject
 {
     Q_OBJECT
