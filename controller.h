@@ -2,9 +2,6 @@
 #define CONTROLLER_H
 
 #include <QObject>
-#include <QHash>
-#include <QVector>
-#include <QtSql>
 
 class Controller : public QObject
 {

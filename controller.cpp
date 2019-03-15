@@ -1,9 +1,3 @@
-#include <QDebug>
-#include <QElapsedTimer>
-#include <QDate>
-#include <QTime>
-#include <QtMath>
-#include <QDateTime>
 #include "controller.h"
 
 #include <math.h>
