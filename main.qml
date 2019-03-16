@@ -10,13 +10,6 @@ Rectangle {
     width: Screen.desktopAvailableWidth / 4
     height: Screen.desktopAvailableHeight / 2
 
-    Component.onCompleted: {
-        controller.setScreenWidth(Screen.desktopAvailableWidth)
-    }
-    onWidthChanged:{
-        controller.setScreenWidth(mainRectangle.width)
-    }
-
     StackView {
         id: stack
         initialItem: mainComponent
@@ -41,7 +34,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        Math.random()
+                        currentWord.text = Math.random()
                     }
                 }
             }
