@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>TrainingComponent.qml</file>
+        <file>VocabulariesComponent.qml</file>
+        <file>AboutComponent.qml</file>
     </qresource>
 </RCC>
