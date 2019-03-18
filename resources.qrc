@@ -4,5 +4,8 @@
         <file>TrainingComponent.qml</file>
         <file>VocabulariesComponent.qml</file>
         <file>AboutComponent.qml</file>
+        <file>AddLanguageComponent.qml</file>
+        <file>WordListComponent.qml</file>
+        <file>AddWordComponent.qml</file>
     </qresource>
 </RCC>

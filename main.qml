@@ -55,5 +55,17 @@ Rectangle {
         id: aboutComponent
     }
 
+    AddLanguageComponent {
+        id: addLanguageComponent
+    }
+
+    WordListComponent {
+        id: wordListComponent
+    }
+
+    AddWordComponent {
+        id: addWordComponent
+    }
+
 }
 
