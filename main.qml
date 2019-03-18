@@ -66,6 +66,5 @@ Rectangle {
     AddWordComponent {
         id: addWordComponent
     }
-
 }
 

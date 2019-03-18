@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVariant>
+#include <QtSql>
 
 #include "word.h"
 
@@ -13,8 +14,10 @@ class Controller : public QObject
 public:
     explicit Controller(QObject *parent = nullptr);
     Q_INVOKABLE QVariantMap getNextWord();
+    Q_INVOKABLE void addNewWord(QString, QString);
     int getTileSize();
 private:
+    QSqlDatabase db_;
     int tile_size_;
 signals:
     void tileSizeChanged();

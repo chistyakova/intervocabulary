@@ -1,6 +1,6 @@
 QT += qml quick sql
 
-CONFIG += c++11
+CONFIG += c++11 console
 
 SOURCES += \
     main.cpp \
