@@ -11,20 +11,17 @@ Component {
             onClicked: stack.pop()
         }
         Column {
-            Text {
-                text: qsTr("Слово")
-            }
+            spacing: 5
+            anchors.centerIn: parent
+            width: parent.width
             TextField  {
                 id: newWordNative
-            }
-            Text {
-                text: qsTr("Перевод")
+                placeholderText: qsTr("Слово")
             }
             TextField  {
                 id: newWordTranslation
+                placeholderText: qsTr("Перевод")
             }
-            anchors.centerIn: parent
-            width: parent.width
             Button {
                 width: parent.width
                 text: "ОК"

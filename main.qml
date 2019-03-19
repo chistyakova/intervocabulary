@@ -23,6 +23,8 @@ Rectangle {
             Column {
                 anchors.centerIn: parent
                 width: parent.width
+                spacing: 5
+                padding : 5
                 Button {
                     width: parent.width
                     text: "ТРЕНИРОВКА"

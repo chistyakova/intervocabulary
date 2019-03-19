@@ -12,11 +12,11 @@ Component {
             onClicked: stack.pop()
         }
         Text {
-            anchors.centerIn: parent //не знаю как выровнять сверху по центру
+            anchors.top: parent.top //не знаю как выровнять сверху по центру
             text: "MОИ СЛОВАРИ"
         }
         Button {
-            anchors.centerIn: parent
+            anchors.bottom: parent.bottom
             width: parent.width
             text: "Добавить язык"
             onClicked: stack.push(addLanguageComponent)

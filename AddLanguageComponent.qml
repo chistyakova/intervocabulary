@@ -14,14 +14,16 @@ Component {
         Column {
             anchors.centerIn: parent
             width: parent.width
+            spacing: 5
             TextField  {
                 placeholderText: qsTr("Введите язык")
             }
-            Button {
-                width: parent.width
-                text: "ОК"
-                onClicked: stack.push(wordListComponent)
-            }
+        }
+        Button {
+            width: parent.width
+            anchors.bottom: parent.bottom
+            text: "ОК"
+            onClicked: stack.push(wordListComponent)
         }
     }
 }

@@ -14,11 +14,13 @@ Component {
         Column {
             anchors.centerIn: parent
             width: parent.width
-            Button {
-                width: parent.width
-                text: "Добавить слово"
-                onClicked: stack.push(addWordComponent)
-            }
+
+        }
+        Button {
+            width: parent.width
+            anchors.bottom: parent.bottom
+            text: "Добавить слово"
+            onClicked: stack.push(addWordComponent)
         }
     }
 }
