@@ -5,6 +5,7 @@
 #include <QVariant>
 #include <QtSql>
 
+#include "dictionarymodel.h"
 #include "word.h"
 
 class Controller : public QObject
@@ -16,7 +17,9 @@ public:
     Q_INVOKABLE QVariantMap getNextWord();
     Q_INVOKABLE void addNewWord(QString, QString);
     int getTileSize();
+    DictionaryModel *dictionary_model;
 private:
+    QVector<Word> current_words_;
     QSqlDatabase db_;
     int tile_size_;
 signals:

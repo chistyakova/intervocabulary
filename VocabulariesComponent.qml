@@ -12,8 +12,41 @@ Component {
             onClicked: stack.pop()
         }
         Text {
+            id: header
             anchors.top: parent.top //не знаю как выровнять сверху по центру
+            anchors.horizontalCenter: parent.horizontalCenter
             text: "MОИ СЛОВАРИ"
+        }
+        ListView {
+            anchors.centerIn: parent
+            height: 90
+            width: 300
+            model: ListModel {
+                ListElement {
+                    language: "Korean"
+                    title: "ККЦ 1 курс"
+                }
+                ListElement {
+                    language: "Korean"
+                    title: "ККЦ 2 курс"
+                }
+                ListElement {
+                    language: "English"
+                    title: "Слова из сериала Офис"
+                }
+            }
+            Component {
+                    id: dictionaryDelegate
+                    Button {
+                        width: 300
+                        height: 30
+                        text: language + ": " + title
+                        onClicked: stack.push(wordListComponent)
+
+                    }
+                }
+
+            delegate: dictionaryDelegate
         }
         Button {
             anchors.bottom: parent.bottom

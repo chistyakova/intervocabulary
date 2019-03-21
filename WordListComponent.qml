@@ -11,9 +11,15 @@ Component {
             text: "< НАЗАД"
             onClicked: stack.pop()
         }
-        Column {
+        ListView {
+            width: 300; height: 300
             anchors.centerIn: parent
-            width: parent.width
+
+            contentWidth: 320
+            flickableDirection: Flickable.AutoFlickDirection
+
+            model: dictionaryModel
+            delegate: Text {text: model.native+" - "+model.translation}
 
         }
         Button {

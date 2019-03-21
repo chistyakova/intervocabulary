@@ -10,6 +10,7 @@ Controller::Controller(QObject *parent) : QObject(parent) {
         qDebug() << db_.lastError().text();
     QSqlQuery query("CREATE TABLE IF NOT EXISTS default "
                     "(native TEXT, translation TEXT);");
+    dictionary_model = new DictionaryModel(&current_words_);
 }
 
 

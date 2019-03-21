@@ -5,12 +5,14 @@ CONFIG += c++11 console
 SOURCES += \
     main.cpp \
     controller.cpp \
-    word.cpp
+    word.cpp \
+    dictionarymodel.cpp
 
 HEADERS += \
     controller.h \
     helpers.h \
-    word.h
+    word.h \
+    dictionarymodel.h
 
 RESOURCES += \
     resources.qrc
