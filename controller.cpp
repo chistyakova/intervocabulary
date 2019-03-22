@@ -5,11 +5,18 @@
 Controller::Controller(QObject *parent) : QObject(parent) {
     // Инициализируем базу данных.
     db_ = QSqlDatabase::addDatabase("QSQLITE");
-    db_.setDatabaseName("tiary.sqlite");
+    db_.setDatabaseName("intervocabulary.sqlite");
     if (!db_.open())
         qDebug() << db_.lastError().text();
     QSqlQuery query("CREATE TABLE IF NOT EXISTS default "
                     "(native TEXT, translation TEXT);");
+    query.exec("SELECT native,translation FROM default");
+    while(query.next()) {
+      Word w;
+      w.native_ = query.value(0).toString();
+      w.translation_ = query.value(1).toString();
+      current_words_.push_back(w);
+    }
     dictionary_model = new DictionaryModel(&current_words_);
 }
 

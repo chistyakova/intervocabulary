@@ -9,8 +9,7 @@ int DictionaryModel::rowCount(const QModelIndex &parent) const {
     if (parent.isValid()) {
         return 0;
     }
-    return 10;
-    //return words_->count();
+    return words_->count();
 }
 
 QHash<int, QByteArray> DictionaryModel::roleNames() const {
@@ -26,10 +25,10 @@ QVariant DictionaryModel::data(const QModelIndex &index, int role) const {
     }
     switch (role) {
         case Native: {
-            return "На русском";
+            return words_->at(index.row()).native_;
         }
         case Translation: {
-            return "На иностранном";
+            return words_->at(index.row()).translation_;
         }
         default:
             return QVariant();

@@ -9,7 +9,7 @@ class DictionaryModel : public QAbstractListModel
 {
   Q_OBJECT
 public:
-  DictionaryModel(QVector<Word> *, QObject *parent = 0);
+  DictionaryModel(QVector<Word> *, QObject *parent = nullptr);
   virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
   enum Roles {
     Native = Qt::UserRole + 1,
