@@ -9,6 +9,7 @@ Item {
             id: vocabulariesList
             Layout.fillHeight: true
             Layout.fillWidth: true
+            // model: dictionariesModel
             model: ListModel {
                 id: vocabulariesModel
                 ListElement {
