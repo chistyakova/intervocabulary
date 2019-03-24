@@ -1,11 +1,15 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>TrainingComponent.qml</file>
-        <file>VocabulariesComponent.qml</file>
-        <file>AboutComponent.qml</file>
-        <file>AddLanguageComponent.qml</file>
-        <file>WordListComponent.qml</file>
-        <file>AddWordComponent.qml</file>
+        <file>components/Vocabularies.qml</file>
+        <file>components/About.qml</file>
+        <file>components/Vocabulary.qml</file>
+        <file>components/Cancellable.qml</file>
+        <file>components/Backable.qml</file>
+        <file>components/Word.qml</file>
+        <file>svg/select.svg</file>
+        <file>svg/delete.svg</file>
+        <file>svg/edit.svg</file>
+        <file>svg/add.svg</file>
     </qresource>
 </RCC>

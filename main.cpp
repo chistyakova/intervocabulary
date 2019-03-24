@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-	QGuiApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     QQuickView view;
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     Controller *controller = new Controller();
@@ -21,5 +21,5 @@ int main(int argc, char *argv[])
     view.setSource(QUrl("qrc:/main.qml"));
     view.show();
 
-	return app.exec();
+    return app.exec();
 }

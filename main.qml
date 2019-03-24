@@ -2,7 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.2
-import "."
+import "components"
 
 Rectangle {
     id: mainRectangle
@@ -19,7 +19,6 @@ Rectangle {
     Component {
         id: mainComponent
         Rectangle {
-            color: "#00ffff"
             Column {
                 anchors.centerIn: parent
                 width: parent.width
@@ -28,45 +27,49 @@ Rectangle {
                 Button {
                     width: parent.width
                     text: "ТРЕНИРОВКА"
-                    onClicked: stack.push(trainingComponent)
+                    //onClicked: stack.push(trainingPoppable)
                 }
                 Button {
                     width: parent.width
                     text: "МОИ СЛОВАРИ"
-                    onClicked: stack.push(vocabulariesComponent)
+                    onClicked: stack.push(vocabulariesPoppable)
                 }
                 Button {
                     width: parent.width
                     text: "О ПРОГРАММЕ"
-                    onClicked: stack.push(aboutComponent)
+                    onClicked: stack.push(aboutPoppable)
                 }
             }
         }
     }
 
-
-    TrainingComponent {
-        id: trainingComponent
+    Component {
+        id: trainingPoppable
+        Backable {
+            title: ""
+            content: Rectangle {
+                color: "red"
+                Text {
+                    text: "dynamic comonent"
+                }
+            }
+        }
     }
 
-    VocabulariesComponent {
-        id: vocabulariesComponent
+    Component {
+        id: vocabulariesPoppable
+        Backable {
+            title: "МОИ СЛОВАРИ"
+            content: Vocabularies {}
+        }
     }
 
-    AboutComponent {
-        id: aboutComponent
-    }
-
-    AddLanguageComponent {
-        id: addLanguageComponent
-    }
-
-    WordListComponent {
-        id: wordListComponent
-    }
-
-    AddWordComponent {
-        id: addWordComponent
+    Component {
+        id: aboutPoppable
+        Backable {
+            title: "О ПРОГРАММЕ"
+            content: About {}
+        }
     }
 }
 
