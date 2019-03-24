@@ -7,7 +7,7 @@ Item {
         Text {
             id: currentWord
             anchors.centerIn: parent
-            text: controller.getNextWord().native_word
+            text: controller.getNextWord().own
         }
         Image {
             source: "qrc:///svg/next.svg"
@@ -18,7 +18,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    currentWord.text = controller.getNextWord().native_word
+                    currentWord.text = controller.getNextWord().own
                 }
             }
         }

@@ -84,14 +84,14 @@ Item {
         id: wordSaveCancelContainer
         SaveCancelContainer {
             content: Word {
-                vocabulary_title: title
-                native_word: {
+                vocabulary: title
+                own: {
                     if (selected_word > -1)
                         wordsModel.get(selected_word).own
                     else
                         ""
                 }
-                foreign_word: {
+                foreign: {
                     if (selected_word > -1)
                         wordsModel.get(selected_word).foreign
                     else

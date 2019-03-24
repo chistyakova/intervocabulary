@@ -25,10 +25,10 @@ QVariant DictionaryModel::data(const QModelIndex &index, int role) const {
     }
     switch (role) {
         case Native: {
-            return words_->at(index.row()).native_;
+            return words_->at(index.row()).own_;
         }
         case Translation: {
-            return words_->at(index.row()).translation_;
+            return words_->at(index.row()).foreign_;
         }
         default:
             return QVariant();

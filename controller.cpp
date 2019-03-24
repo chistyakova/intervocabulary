@@ -14,8 +14,8 @@ Controller::Controller(QObject *parent) : QObject(parent) {
     query.exec("SELECT native,translation FROM default");
     while(query.next()) {
       Word w;
-      w.native_ = query.value(0).toString();
-      w.translation_ = query.value(1).toString();
+      w.own_ = query.value(0).toString();
+      w.foreign_ = query.value(1).toString();
       current_words_.push_back(w);
     }
     dictionary_model = new DictionaryModel(&current_words_);
@@ -24,11 +24,10 @@ Controller::Controller(QObject *parent) : QObject(parent) {
 
 QVariantMap Controller::getNextWord() {
     Word w;
-    w.native_ = QDateTime::currentDateTime().toString();
+    w.own_ = QDateTime::currentDateTime().toString();
     QVariantMap map;
-    map.insert("native_word", w.native_);
-    map.insert("foreign_word", w.translation_);
-    map.insert("transcribtion", w.transcribtion_);
+    map.insert("own", w.own_);
+    map.insert("foreign", w.foreign_);
     return map;
 }
 
@@ -48,6 +47,6 @@ void Controller::saveVocabulary(QString flag, QString title, QString describtion
     qDebug() << "C++ saveVocabulary" << flag << title << describtion;
 }
 
-void Controller::saveWord(QString vocabulary_title, QString native_word, QString foreign_word) {
-    qDebug() << "C++ saveWord" << vocabulary_title << native_word << foreign_word;
+void Controller::saveWord(QString vocabulary, QString own, QString foreign) {
+    qDebug() << "C++ saveWord" << vocabulary << own << foreign;
 }
