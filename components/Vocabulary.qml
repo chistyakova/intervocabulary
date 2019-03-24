@@ -27,9 +27,11 @@ Item {
             id: describtionFiled
         }
     }
+    // Здесь мы определяем фукнцию, вызываемую при клике по кнопке SAVE
+    // универсального компонента SaveCancelContainer.
     Component.onCompleted: {
         parent.parent.parent.save = function() {
-            console.log(title)
+            controller.saveVocabulary(flag, title, describtion)
         }
     }
 }

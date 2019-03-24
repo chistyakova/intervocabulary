@@ -1,3 +1,4 @@
+#include <QDateTime>
 #include <QDebug>
 #include "controller.h"
 #include <math.h>
@@ -23,9 +24,10 @@ Controller::Controller(QObject *parent) : QObject(parent) {
 
 QVariantMap Controller::getNextWord() {
     Word w;
+    w.native_ = QDateTime::currentDateTime().toString();
     QVariantMap map;
-    map.insert("native", w.native_);
-    map.insert("translation", w.translation_);
+    map.insert("native_word", w.native_);
+    map.insert("foreign_word", w.translation_);
     map.insert("transcribtion", w.transcribtion_);
     return map;
 }
@@ -40,4 +42,12 @@ void Controller::addNewWord(QString native, QString translation) {
 
 int Controller::getTileSize() {
     return tile_size_;
+}
+
+void Controller::saveVocabulary(QString flag, QString title, QString describtion) {
+    qDebug() << "C++ saveVocabulary" << flag << title << describtion;
+}
+
+void Controller::saveWord(QString vocabulary_title, QString native_word, QString foreign_word) {
+    qDebug() << "C++ saveWord" << vocabulary_title << native_word << foreign_word;
 }

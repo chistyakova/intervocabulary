@@ -4,12 +4,18 @@
         <file>components/Vocabularies.qml</file>
         <file>components/About.qml</file>
         <file>components/Vocabulary.qml</file>
-        <file>components/Cancellable.qml</file>
-        <file>components/Backable.qml</file>
+        <file>components/SaveCancelContainer.qml</file>
+        <file>components/TitleContainer.qml</file>
         <file>components/Word.qml</file>
         <file>svg/select.svg</file>
         <file>svg/delete.svg</file>
         <file>svg/edit.svg</file>
         <file>svg/add.svg</file>
+        <file>components/Words.qml</file>
+        <file>svg/list.svg</file>
+        <file>components/CloseContainer.qml</file>
+        <file>svg/close.svg</file>
+        <file>components/Training001.qml</file>
+        <file>svg/next.svg</file>
     </qresource>
 </RCC>

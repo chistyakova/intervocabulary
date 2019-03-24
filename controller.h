@@ -16,6 +16,8 @@ public:
     explicit Controller(QObject *parent = nullptr);
     Q_INVOKABLE QVariantMap getNextWord();
     Q_INVOKABLE void addNewWord(QString, QString);
+    Q_INVOKABLE void saveVocabulary(QString, QString, QString);
+    Q_INVOKABLE void saveWord(QString, QString, QString);
     int getTileSize();
     DictionaryModel *dictionary_model;
 private:
@@ -24,7 +26,7 @@ private:
     int tile_size_;
 signals:
     void tileSizeChanged();
-public slots:    
+public slots:
 };
 
 #endif // CONTROLLER_H

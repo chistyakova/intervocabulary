@@ -27,17 +27,17 @@ Rectangle {
                 Button {
                     width: parent.width
                     text: "ТРЕНИРОВКА"
-                    //onClicked: stack.push(trainingPoppable)
+                    onClicked: stack.push(training001CloseContainer)
                 }
                 Button {
                     width: parent.width
                     text: "МОИ СЛОВАРИ"
-                    onClicked: stack.push(vocabulariesPoppable)
+                    onClicked: stack.push(vocabulariesTitleContainer)
                 }
                 Button {
                     width: parent.width
                     text: "О ПРОГРАММЕ"
-                    onClicked: stack.push(aboutPoppable)
+                    onClicked: stack.push(aboutTitleContainer)
                 }
             }
         }
@@ -45,7 +45,7 @@ Rectangle {
 
     Component {
         id: trainingPoppable
-        Backable {
+        TitleContainer {
             title: ""
             content: Rectangle {
                 color: "red"
@@ -57,18 +57,25 @@ Rectangle {
     }
 
     Component {
-        id: vocabulariesPoppable
-        Backable {
+        id: vocabulariesTitleContainer
+        TitleContainer {
             title: "МОИ СЛОВАРИ"
             content: Vocabularies {}
         }
     }
 
     Component {
-        id: aboutPoppable
-        Backable {
+        id: aboutTitleContainer
+        TitleContainer {
             title: "О ПРОГРАММЕ"
             content: About {}
+        }
+    }
+
+    Component {
+        id: training001CloseContainer
+        CloseContainer {
+            content: Training001 {}
         }
     }
 }

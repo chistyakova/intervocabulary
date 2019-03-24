@@ -3,6 +3,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
 
 Item {
+    property int selected_vocabulary: 0
     ColumnLayout {
         anchors.fill: parent
         ListView {
@@ -76,7 +77,7 @@ Item {
             delegate: Component {
                 Rectangle {
                     width: parent.width
-                    height: 30
+                    height: 24
                     RowLayout {
                         anchors.fill: parent
                         Image {
@@ -84,19 +85,23 @@ Item {
                             sourceSize.width: 24
                             sourceSize.height: 24
                         }
-                        Text {
+                        Rectangle {
                             Layout.fillWidth: true
-                            text: title
+                            height: 24
+                            Text {
+                                anchors.centerIn: parent
+                                text: title
+                            }
                         }
                         Image {
-                            source: "qrc:///svg/add.svg"
+                            source: "qrc:///svg/list.svg"
                             sourceSize.width: 24
                             sourceSize.height: 24
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    vocabulariesList.currentIndex = index
-                                    stack.push(vocabularyPoppable)
+                                    selected_vocabulary = index
+                                    stack.push(wordsTitleContainer)
                                 }
                             }
                         }
@@ -107,8 +112,19 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    vocabulariesList.currentIndex = index
-                                    stack.push(vocabularyCancellable)
+                                    selected_vocabulary = index
+                                    stack.push(vocabularySaveCancelContainer)
+                                }
+                            }
+                        }
+                        Image {
+                            source: "qrc:///svg/delete.svg"
+                            sourceSize.width: 24
+                            sourceSize.height: 24
+                            MouseArea {
+                                anchors.fill: parent
+                                onPressAndHold: {
+                                    console.log("delete "+index)
                                 }
                             }
                         }
@@ -118,23 +134,31 @@ Item {
         }
         Button {
             text: "Добавить словарь"
-            onClicked: stack.push(vocabularyCancellable)
+            onClicked: {
+                selected_vocabulary = -1
+                stack.push(vocabularySaveCancelContainer)
+            }
         }
     }
     Component {
-        id: vocabularyPoppable
-        Backable {
-            title: vocabulariesModel.get(vocabulariesList.currentIndex).title
-            content: Vocabulary {}
+        id: wordsTitleContainer
+        TitleContainer {
+            title: vocabulariesModel.get(selected_vocabulary).title
+            content: Words {}
         }
     }
     Component {
-        id: vocabularyCancellable
-        Cancellable {
+        id: vocabularySaveCancelContainer
+        SaveCancelContainer {
             content: Vocabulary {
-                flag: "пока нет"
-                title: vocabulariesList.currentIndex
-                describtion: "пока нет"
+                flag: ""
+                title: {
+                    if (selected_vocabulary > -1)
+                        vocabulariesModel.get(selected_vocabulary).title
+                    else
+                        ""
+                }
+                describtion: ""
             }
         }
     }

@@ -15,6 +15,7 @@ Item {
             anchors.left: parent.left
             onClicked: {
                 parent.parent.save()
+                stack.pop()
             }
         }
         Button {
@@ -24,7 +25,7 @@ Item {
             onClicked: stack.pop()
         }
         Loader {
-            id: contentCancellable
+            id: contentSaveCancelContainer
             anchors.fill: parent
             sourceComponent: parent.parent.content
         }

@@ -27,11 +27,6 @@ Item {
                     text: parent.parent.parent.parent.title
                 }
             }
-            Image {
-                source: "qrc:///svg/delete.svg"
-                sourceSize.width: 24
-                sourceSize.height: 24
-            }
         }
         Loader {
             Layout.fillWidth: true
