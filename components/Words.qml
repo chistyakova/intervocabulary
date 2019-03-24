@@ -10,26 +10,26 @@ Item {
             id: wordsList
             Layout.fillHeight: true
             Layout.fillWidth: true
-            // model: dictionariesModel
-            model: ListModel {
-                id: wordsModel
-                ListElement {
-                    own: "кошка"
-                    foreign: "cat"
-                }
-                ListElement {
-                    own: "собака"
-                    foreign: "dog"
-                }
-                ListElement {
-                    own: "дом"
-                    foreign: "home"
-                }
-                ListElement {
-                    own: "штаны"
-                    foreign: "pants"
-                }
-            }
+            model: wordsModel
+//            model: ListModel {
+//                id: wordsModel
+//                ListElement {
+//                    native_word: "кошка"
+//                    foreign_word: "cat"
+//                }
+//                ListElement {
+//                    native_word: "собака"
+//                    foreign_word: "dog"
+//                }
+//                ListElement {
+//                    native_word: "дом"
+//                    foreign_word: "home"
+//                }
+//                ListElement {
+//                    native_word: "штаны"
+//                    foreign_word: "pants"
+//                }
+//            }
             delegate: Component {
                 Rectangle {
                     width: parent.width
@@ -42,7 +42,7 @@ Item {
                             height: 24
                             Text {
                                 anchors.centerIn: parent
-                                text: own+" - "+foreign
+                                text: native_word+" - "+foreign_word
                             }
                         }
                         Image {
@@ -84,16 +84,16 @@ Item {
         id: wordSaveCancelContainer
         SaveCancelContainer {
             content: Word {
-                vocabulary: title
-                own: {
+                vocabulary_title: title
+                native_word: {
                     if (selected_word > -1)
-                        wordsModel.get(selected_word).own
+                        wordsModel.get(selected_word).native_word
                     else
                         ""
                 }
-                foreign: {
+                foreign_word: {
                     if (selected_word > -1)
-                        wordsModel.get(selected_word).foreign
+                        wordsModel.get(selected_word).foreign_word
                     else
                         ""
                 }

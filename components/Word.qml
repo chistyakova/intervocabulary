@@ -3,9 +3,9 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 Item {
-    property string vocabulary
-    property alias own: ownTextField.text
-    property alias foreign: foreignTextField.text
+    property string vocabulary_title
+    property alias native_word: nativeWordTextField.text
+    property alias foreign_word: foreignWordTextField.text
     function save() {
         console.log("SAVE WORD")
     }
@@ -15,20 +15,20 @@ Item {
             text: "На родном языке"
         }
         TextField {
-            id: ownTextField
+            id: nativeWordTextField
         }
         Text {
             text: "На иностранном"
         }
         TextField {
-            id: foreignTextField
+            id: foreignWordTextField
         }
     }
     // Здесь мы определяем фукнцию, вызываемую при клике по кнопке SAVE
     // универсального компонента SaveCancelContainer.
     Component.onCompleted: {
         parent.parent.parent.save = function() {
-            controller.saveWord(vocabulary, own, foreign)
+            controller.saveWord(vocabulary_title, native_word, foreign_word)
         }
     }
 }

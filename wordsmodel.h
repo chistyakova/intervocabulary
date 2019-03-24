@@ -1,19 +1,19 @@
-#ifndef DICTIONARYMODEL_H
-#define DICTIONARYMODEL_H
+#ifndef WORDSMODEL_H
+#define WORDSMODEL_H
 
 #include <QAbstractListModel>
 
 #include "word.h"
 
-class DictionaryModel : public QAbstractListModel
+class WordsModel : public QAbstractListModel
 {
   Q_OBJECT
 public:
-  DictionaryModel(QVector<Word> *, QObject *parent = nullptr);
+  WordsModel(QVector<Word> *, QObject *parent = nullptr);
   virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
   enum Roles {
-    Native = Qt::UserRole + 1,
-    Translation
+    native_word = Qt::UserRole + 1,
+    foreign_word
   };
   virtual QHash<int, QByteArray> roleNames() const;
   virtual QVariant data(const QModelIndex &index, int role) const;
@@ -21,4 +21,4 @@ private:
   QVector<Word> *words_;
 };
 
-#endif // DICTIONARYMODEL_H
+#endif // WORDSMODEL_H

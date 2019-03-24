@@ -6,13 +6,13 @@ SOURCES += \
     main.cpp \
     controller.cpp \
     word.cpp \
-    dictionarymodel.cpp
+    wordsmodel.cpp
 
 HEADERS += \
     controller.h \
     helpers.h \
     word.h \
-    dictionarymodel.h
+    wordsmodel.h
 
 RESOURCES += \
     resources.qrc

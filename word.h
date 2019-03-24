@@ -7,8 +7,8 @@ class Word
 {
 public:
     explicit Word();
-    QString own_;
-    QString foreign_;
+    QString native_word_;
+    QString foreign_word_;
 };
 
 #endif // WORD_H
