@@ -77,11 +77,11 @@ Item {
             delegate: Component {
                 Rectangle {
                     width: parent.width
-                    height: 24
+                    height: 48
                     RowLayout {
                         anchors.fill: parent
                         Image {
-                            source: "qrc:///svg/select.svg"
+                            source: "qrc:/svg/select.svg"
                             sourceSize.width: 24
                             sourceSize.height: 24
                         }
@@ -93,10 +93,16 @@ Item {
                                 text: title
                             }
                         }
-                        Image {
-                            source: "qrc:///svg/list.svg"
-                            sourceSize.width: 24
-                            sourceSize.height: 24
+                        Rectangle {
+                            width: 48
+                            height: 48
+                            color: "lightblue"
+                            Image {
+                                anchors.centerIn: parent
+                                source: "qrc:/svg/list.svg"
+                                sourceSize.width: 24
+                                sourceSize.height: 24
+                            }
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
@@ -105,6 +111,7 @@ Item {
                                 }
                             }
                         }
+
                         Image {
                             source: "qrc:///svg/edit.svg"
                             sourceSize.width: 24
