@@ -17,5 +17,6 @@
         <file>svg/close.svg</file>
         <file>components/Training001.qml</file>
         <file>svg/next.svg</file>
+        <file>components/MyButton.qml</file>
     </qresource>
 </RCC>

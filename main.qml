@@ -1,15 +1,20 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.0
-import QtQuick.Window 2.2
+import QtQuick.Window 2.12
 import "components"
 
 Rectangle {
     id: mainRectangle
 
-    // Для Desktop:
+    // Задание ширины и высоты окна.
+    // Только для Desktop, на телефоне не применяется.
     width: Screen.desktopAvailableWidth / 4
     height: Screen.desktopAvailableHeight / 2
+
+    property int fraction: mainRectangle.height / 20
+    property alias rootWidth: mainRectangle.width
+    property alias rootHeight: mainRectangle.height
 
     StackView {
         id: stack
@@ -26,17 +31,20 @@ Rectangle {
                 padding : 5
                 Button {
                     width: parent.width
+                    font.pixelSize: fraction * 2
                     text: "ТРЕНИРОВКА"
                     onClicked: stack.push(training001CloseContainer)
                 }
                 Button {
                     width: parent.width
                     text: "МОИ СЛОВАРИ"
+                    font.pixelSize: fraction * 2
                     onClicked: stack.push(vocabulariesTitleContainer)
                 }
                 Button {
                     width: parent.width
                     text: "О ПРОГРАММЕ"
+                    font.pixelSize: fraction * 2
                     onClicked: stack.push(aboutTitleContainer)
                 }
             }

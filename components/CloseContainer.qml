@@ -8,8 +8,8 @@ Item {
             anchors.top: parent.top
             anchors.left: parent.left
             source: "qrc:///svg/close.svg"
-            sourceSize.width: 24
-            sourceSize.height: 24
+            sourceSize.width: fraction * 2
+            sourceSize.height: fraction * 2
             z: 1
             MouseArea {
                 anchors.fill: parent

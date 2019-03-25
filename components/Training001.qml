@@ -14,15 +14,22 @@ Item {
         anchors.fill: parent
         color: "cyan"
         Text {
-            id: currentWord
-            anchors.centerIn: parent
-            font.pixelSize : 48
-            text: previous_word1+"-"+previous_word2+"<br><b>"+current_word1+"</b>"
+            anchors.bottom: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: fraction * 2
+            text: previous_word1+" - "+previous_word2
         }
+        Text {
+            anchors.top: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize : fraction * 4
+            text: current_word1
+        }
+
         Image {
             source: "qrc:///svg/next.svg"
-            sourceSize.width: 72
-            sourceSize.height: 72
+            sourceSize.width: fraction * 5
+            sourceSize.height: fraction * 5
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             MouseArea {
