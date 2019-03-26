@@ -1,5 +1,14 @@
 #include "wordsmodel.h"
 
+QVariantMap WordsModel::get(int index) {
+    QVariantMap map;
+    if (index >= 0 && index < words_->count()) {
+        map.insert("native_word", words_->at(index).native_word_);
+        map.insert("foreign_word", words_->at(index).foreign_word_);
+    }
+    return map;
+}
+
 WordsModel::WordsModel(QVector<Word> *words, QObject *parent):
   QAbstractListModel(parent) {
   words_ = words;
