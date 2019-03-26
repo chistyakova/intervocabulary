@@ -10,70 +10,7 @@ Item {
             id: vocabulariesList
             Layout.fillHeight: true
             Layout.fillWidth: true
-            // model: dictionariesModel
-            model: ListModel {
-                id: vocabulariesModel
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 1 курс"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 2 курс"
-                }
-                ListElement {
-                    language: "English"
-                    title: "Слова из сериала Офис"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 1 курс"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 2 курс"
-                }
-                ListElement {
-                    language: "English"
-                    title: "Слова из сериала Офис"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 1 курс"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 2 курс"
-                }
-                ListElement {
-                    language: "English"
-                    title: "Слова из сериала Офис"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 1 курс"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 2 курс"
-                }
-                ListElement {
-                    language: "English"
-                    title: "Слова из сериала Офис"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 1 курс"
-                }
-                ListElement {
-                    language: "Korean"
-                    title: "ККЦ 2 курс"
-                }
-                ListElement {
-                    language: "English"
-                    title: "Слова из сериала Офис"
-                }
-            }
+            model: vocubsModel
             delegate: Component {
                 Rectangle {
                     width: parent.width

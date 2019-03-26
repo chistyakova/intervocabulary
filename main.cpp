@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     QQmlContext *ctxt = view.rootContext();
     ctxt->setContextProperty("controller", controller);
     ctxt->setContextProperty("wordsModel", controller->words_model);
-    //ctxt->setContextProperty("dictionariesModel", controller->dictionaries_model);
+    ctxt->setContextProperty("vocubsModel", controller->vocubs_model);
 
     view.setSource(QUrl("qrc:/main.qml"));
     view.show();
