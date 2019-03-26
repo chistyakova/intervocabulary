@@ -6,13 +6,17 @@ SOURCES += \
     main.cpp \
     controller.cpp \
     word.cpp \
-    wordsmodel.cpp
+    wordsmodel.cpp \
+    vocubsmodel.cpp \
+    vocub.cpp
 
 HEADERS += \
     controller.h \
     helpers.h \
     word.h \
-    wordsmodel.h
+    wordsmodel.h \
+    vocubsmodel.h \
+    vocub.h
 
 RESOURCES += \
     resources.qrc
