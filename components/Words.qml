@@ -11,35 +11,16 @@ Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
             model: wordsModel
-//            model: ListModel {
-//                id: wordsModel
-//                ListElement {
-//                    native_word: "кошка"
-//                    foreign_word: "cat"
-//                }
-//                ListElement {
-//                    native_word: "собака"
-//                    foreign_word: "dog"
-//                }
-//                ListElement {
-//                    native_word: "дом"
-//                    foreign_word: "home"
-//                }
-//                ListElement {
-//                    native_word: "штаны"
-//                    foreign_word: "pants"
-//                }
-//            }
             delegate: Component {
                 Rectangle {
                     width: parent.width
-                    height: 24
+                    height: fraction * 2
                     RowLayout {
                         width: parent.width
-                        height: 24
+                        height: parent.height
                         Rectangle {
                             Layout.fillWidth: true
-                            height: 24
+                            height: parent.height
                             Text {
                                 anchors.centerIn: parent
                                 text: native_word+" - "+foreign_word

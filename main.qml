@@ -31,20 +31,20 @@ Rectangle {
                 padding : 5
                 Button {
                     width: parent.width
-                    font.pixelSize: fraction * 2
+                    font.pixelSize: fraction
                     text: "ТРЕНИРОВКА"
                     onClicked: stack.push(training001CloseContainer)
                 }
                 Button {
                     width: parent.width
                     text: "МОИ СЛОВАРИ"
-                    font.pixelSize: fraction * 2
+                    font.pixelSize: fraction
                     onClicked: stack.push(vocabulariesTitleContainer)
                 }
                 Button {
                     width: parent.width
                     text: "О ПРОГРАММЕ"
-                    font.pixelSize: fraction * 2
+                    font.pixelSize: fraction
                     onClicked: stack.push(aboutTitleContainer)
                 }
             }
