@@ -15,8 +15,10 @@ int VocubsModel::rowCount(const QModelIndex &parent) const {
 
 QHash<int, QByteArray> VocubsModel::roleNames() const {
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
-    roles[language] = "language";
-    roles[training_flag] = "training_flag";
+    roles[flag] = "flag";
+    roles[title] = "title";
+    roles[description] = "description";
+    roles[table_name] = "table_name";
     return roles;
 }
 
@@ -25,11 +27,17 @@ QVariant VocubsModel::data(const QModelIndex &index, int role) const {
         return QVariant();
     }
     switch (role) {
-        case language: {
-            return vocubs_->at(index.row()).language;
+        case flag: {
+            return vocubs_->at(index.row()).flag;
         }
-        case training_flag: {
-            return vocubs_->at(index.row()).training_flag;
+        case title: {
+            return vocubs_->at(index.row()).title;
+        }
+        case description: {
+            return vocubs_->at(index.row()).description;
+        }
+        case table_name: {
+            return vocubs_->at(index.row()).table_name;
         }
         default:
             return QVariant();

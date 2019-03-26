@@ -165,7 +165,7 @@ Item {
                     else
                         ""
                 }
-                describtion: ""
+                description: ""
             }
         }
     }

@@ -7,8 +7,10 @@ class Vocub
 {
 public:
     Vocub();
-    QString language;
-    bool training_flag;
+    bool flag;
+    QString title;
+    QString description;
+    QString table_name;
 };
 
 #endif // VOCUB_H

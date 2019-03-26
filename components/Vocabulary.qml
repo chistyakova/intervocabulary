@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.12
 Item {
     property alias flag: flagField.text
     property alias title: titleField.text
-    property alias describtion: describtionFiled.text
+    property alias description: descriptionFiled.text
     ColumnLayout {
         anchors.centerIn: parent
         Text {
@@ -24,14 +24,14 @@ Item {
             text: "Описание словаря"
         }
         TextField {
-            id: describtionFiled
+            id: descriptionFiled
         }
     }
     // Здесь мы определяем фукнцию, вызываемую при клике по кнопке SAVE
     // универсального компонента SaveCancelContainer.
     Component.onCompleted: {
         parent.parent.parent.save = function() {
-            controller.saveVocabulary(flag, title, describtion)
+            controller.saveVocab(flag, title, description)
         }
     }
 }

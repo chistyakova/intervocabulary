@@ -13,8 +13,10 @@ public:
     VocubsModel(QVector<Vocub> *vocabs, QObject *parent = nullptr);
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     enum Roles {
-      language = Qt::UserRole + 1,
-      training_flag
+      flag = Qt::UserRole + 1,
+      title,
+      description,
+      table_name
     };
     virtual QHash<int, QByteArray> roleNames() const;
     virtual QVariant data(const QModelIndex &index, int role) const;
