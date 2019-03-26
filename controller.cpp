@@ -18,8 +18,8 @@ Controller::Controller(QObject *parent) : QObject(parent) {
                 ");")) {
         qDebug() << q.lastError();
     }
-    getWords();
     words_model = new WordsModel(&current_words_);
+    getWords();
 
     if (!q.exec("CREATE TABLE IF NOT EXISTS settings ("
                 "flag, "
@@ -43,6 +43,7 @@ void Controller::getWords() {
       w.foreign_word_ = q.value(1).toString();
       current_words_.push_back(w);
     }
+    words_model->notifyChange();
 }
 
 void Controller::getVocubs() {
@@ -91,5 +92,9 @@ void Controller::saveWord(QString vocabulary_title, QString native_word, QString
                 "VALUES ('"+native_word+"','"+foreign_word+"');")) {
         qDebug() << q.lastError();
     }
-    getWords();
+    Word w;
+    w.native_word_ = native_word;
+    w.foreign_word_ = foreign_word;
+    current_words_.push_back(w);
+    words_model->notifyChange();
 }

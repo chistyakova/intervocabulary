@@ -35,3 +35,7 @@ QVariant WordsModel::data(const QModelIndex &index, int role) const {
     }
 }
 
+void WordsModel::notifyChange() {
+    beginResetModel();
+    endResetModel();
+}

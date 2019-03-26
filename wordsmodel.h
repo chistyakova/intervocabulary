@@ -17,6 +17,8 @@ public:
   };
   virtual QHash<int, QByteArray> roleNames() const;
   virtual QVariant data(const QModelIndex &index, int role) const;
+
+  void notifyChange();
 private:
   QVector<Word> *words_;
 };
