@@ -43,3 +43,8 @@ QVariant VocubsModel::data(const QModelIndex &index, int role) const {
             return QVariant();
     }
 }
+
+void VocubsModel::notifyChange() {
+    beginResetModel();
+    endResetModel();
+}

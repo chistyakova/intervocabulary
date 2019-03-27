@@ -29,8 +29,8 @@ Controller::Controller(QObject *parent) : QObject(parent) {
                 ");")) {
         qDebug() << q.lastError();
     }
-    getVocubs();
     vocubs_model = new VocubsModel(&current_vocubs_);
+    getVocubs();
 }
 
 void Controller::getWords() {
@@ -58,6 +58,7 @@ void Controller::getVocubs() {
       v.table_name = q.value(3).toString();
       current_vocubs_.push_back(v);
     }
+    vocubs_model->notifyChange();
 }
 
 QVariantMap Controller::getNextWord() {
