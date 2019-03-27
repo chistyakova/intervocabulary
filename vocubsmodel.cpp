@@ -1,5 +1,15 @@
 #include "vocubsmodel.h"
 
+QVariantMap VocubsModel::get(int index) {
+    QVariantMap map;
+    if (index >= 0 && index < vocubs_->count()) {
+        map.insert("flag", vocubs_->at(index).flag);
+        map.insert("title", vocubs_->at(index).title);
+        map.insert("description", vocubs_->at(index).description);
+    }
+    return map;
+}
+
 VocubsModel::VocubsModel(QVector<Vocub> *vocubs, QObject *parent):
     QAbstractListModel(parent)
 {
@@ -18,7 +28,6 @@ QHash<int, QByteArray> VocubsModel::roleNames() const {
     roles[flag] = "flag";
     roles[title] = "title";
     roles[description] = "description";
-    roles[table_name] = "table_name";
     return roles;
 }
 
@@ -35,9 +44,6 @@ QVariant VocubsModel::data(const QModelIndex &index, int role) const {
         }
         case description: {
             return vocubs_->at(index.row()).description;
-        }
-        case table_name: {
-            return vocubs_->at(index.row()).table_name;
         }
         default:
             return QVariant();
