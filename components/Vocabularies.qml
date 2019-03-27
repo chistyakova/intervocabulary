@@ -44,6 +44,8 @@ Item {
                                 anchors.fill: parent
                                 onClicked: {
                                     selected_vocabulary = index
+                                    controller.getWords(
+                                                vocubsModel.get(selected_vocabulary).title)
                                     stack.push(wordsTitleContainer)
                                 }
                             }

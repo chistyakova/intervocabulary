@@ -11,15 +11,10 @@ Controller::Controller(QObject *parent) : QObject(parent) {
     if (!db_.open()) {
         qDebug() << db_.lastError().text();
     }
-    QSqlQuery q;
-    if (!q.exec("CREATE TABLE IF NOT EXISTS default_table ("
-                "native_word text, "
-                "foreign_word text"
-                ");")) {
-        qDebug() << q.lastError();
-    }
+
     words_model = new WordsModel(&current_words_);
-    getWords();
+
+    QSqlQuery q;
 
     if (!q.exec("CREATE TABLE IF NOT EXISTS settings ("
                 "flag, "
@@ -32,15 +27,15 @@ Controller::Controller(QObject *parent) : QObject(parent) {
     getVocubs();
 }
 
-void Controller::getWords() {
+void Controller::getWords(QString vocub_title) {
     current_words_.clear();
     QSqlQuery q;
-    q.exec("SELECT native_word, foreign_word FROM default_table");
+    q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
     while(q.next()) {
-      Word w;
-      w.native_word_ = q.value(0).toString();
-      w.foreign_word_ = q.value(1).toString();
-      current_words_.push_back(w);
+        Word w;
+        w.native_word_ = q.value(0).toString();
+        w.foreign_word_ = q.value(1).toString();
+        current_words_.push_back(w);
     }
     words_model->notifyChange();
 }
@@ -50,12 +45,12 @@ void Controller::getVocubs() {
     QSqlQuery q;
     q.exec("SELECT flag, title, description FROM settings");
     while(q.next()) {
-      Vocub v;
-      v.flag = q.value(0).toBool();
-      v.title = q.value(1).toString();
-      v.description = q.value(2).toString();
-      v.table_name = q.value(3).toString();
-      current_vocubs_.push_back(v);
+        Vocub v;
+        v.flag = q.value(0).toBool();
+        v.title = q.value(1).toString();
+        v.description = q.value(2).toString();
+        v.table_name = q.value(3).toString();
+        current_vocubs_.push_back(v);
     }
     vocubs_model->notifyChange();
 }
@@ -92,8 +87,13 @@ void Controller::saveVocab(QString flag, QString title, QString description) {
 }
 
 void Controller::saveWord(QString vocabulary_title, QString native_word, QString foreign_word) {
-    qDebug() << "C++ saveWord" << vocabulary_title << native_word << foreign_word;
     QSqlQuery q;
+    if (!q.exec("CREATE TABLE IF NOT EXISTS \""+vocabulary_title+"\" ("
+                "native_word text, "
+                "foreign_word text"
+                ");")) {
+        qDebug() << q.lastError();
+    }
     if (!q.exec("INSERT INTO '"+vocabulary_title+"' (native_word, foreign_word) "
                 "VALUES ('"+native_word+"','"+foreign_word+"');")) {
         qDebug() << q.lastError();
