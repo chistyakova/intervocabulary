@@ -1,5 +1,6 @@
 #include <QDateTime>
 #include <QDebug>
+#include <QDir>
 #include <QRandomGenerator>
 #include "controller.h"
 #include <math.h>
@@ -7,7 +8,11 @@
 Controller::Controller(QObject *parent) : QObject(parent) {
     // Инициализируем базу данных.
     db_ = QSqlDatabase::addDatabase("QSQLITE");
-    db_.setDatabaseName("db.sqlite");
+    QString storage_path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    if (!QDir(storage_path).exists()) {
+        QDir().mkpath(storage_path);
+    }
+    db_.setDatabaseName(storage_path+"/db.sqlite");
     if (!db_.open()) {
         qDebug() << db_.lastError().text();
     }

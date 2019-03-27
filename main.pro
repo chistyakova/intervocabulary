@@ -1,3 +1,5 @@
+TARGET = vocub
+
 QT += qml quick svg sql
 
 CONFIG += c++11
