@@ -7,7 +7,8 @@ Item {
     property alias title: titleField.text
     property alias description: descriptionFiled.text
     ColumnLayout {
-        anchors.centerIn: parent
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
         Text {
             text: "Флаг"
         }

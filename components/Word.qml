@@ -10,7 +10,8 @@ Item {
         console.log("SAVE WORD")
     }
     ColumnLayout {
-        anchors.centerIn: parent
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
         Text {
             text: "На родном языке"
         }

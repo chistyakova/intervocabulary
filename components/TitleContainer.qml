@@ -14,16 +14,21 @@ Item {
             spacing: 0
             Button {
                 id: backButton
-                text: ">"
+                icon.source: "qrc:/svg/next.svg"
+                icon.width: fraction
+                icon.height: fraction
                 onClicked: stack.pop()
             }
             Rectangle {
                 Layout.fillWidth: true
-                height: backButton.height
+                anchors.top: backButton.top
+                anchors.bottom: backButton.bottom
+
                 color: "lightblue"
                 Text {
                     anchors.centerIn: parent
                     color: "blue"
+                    font.pixelSize: fraction
                     text: parent.parent.parent.parent.title
                 }
             }

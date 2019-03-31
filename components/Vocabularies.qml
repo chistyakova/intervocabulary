@@ -19,27 +19,22 @@ Item {
                         anchors.fill: parent
                         Image {
                             source: "qrc:/svg/select.svg"
-                            sourceSize.width: 24
-                            sourceSize.height: 24
+                            sourceSize.width: fraction
+                            sourceSize.height: fraction
                         }
                         Rectangle {
                             Layout.fillWidth: true
-                            height: 24
+                            height: fraction
                             Text {
                                 anchors.centerIn: parent
                                 text: title
+                                font.pixelSize: fraction
                             }
                         }
-                        Rectangle {
-                            width: 48
-                            height: 48
-                            color: "lightblue"
-                            Image {
-                                anchors.centerIn: parent
-                                source: "qrc:/svg/list.svg"
-                                sourceSize.width: 24
-                                sourceSize.height: 24
-                            }
+                        Image {
+                            source: "qrc:/svg/list.svg"
+                            sourceSize.width: fraction
+                            sourceSize.height: fraction
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
@@ -51,10 +46,12 @@ Item {
                             }
                         }
 
+
+
                         Image {
                             source: "qrc:///svg/edit.svg"
-                            sourceSize.width: 24
-                            sourceSize.height: 24
+                            sourceSize.width: fraction
+                            sourceSize.height: fraction
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
@@ -65,8 +62,8 @@ Item {
                         }
                         Image {
                             source: "qrc:///svg/delete.svg"
-                            sourceSize.width: 24
-                            sourceSize.height: 24
+                            sourceSize.width: fraction
+                            sourceSize.height: fraction
                             MouseArea {
                                 anchors.fill: parent
                                 onPressAndHold: {
