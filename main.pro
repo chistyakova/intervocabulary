@@ -1,6 +1,9 @@
 TARGET = vocub
 
-QT += qml quick svg sql androidextras
+QT += qml quick svg sql
+android {
+    QT += androidextras
+}
 
 CONFIG += c++11
 

@@ -4,7 +4,9 @@
 #include <QObject>
 #include <QVariant>
 #include <QtSql>
+#ifdef __ANDROID__
 #include <QAndroidJniObject>
+#endif
 
 #include "wordsmodel.h"
 #include "vocubsmodel.h"

@@ -9,9 +9,14 @@ Controller::Controller(QObject *parent) : QObject(parent) {
     // Инициализируем базу данных.
     db_ = QSqlDatabase::addDatabase("QSQLITE");
 
+    QString storage_path;
+#ifdef __ANDROID__
     QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
     QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-    QString storage_path = mediaPath.toString()+"/Vocub";
+    storage_path = mediaPath.toString()+"/Vocub";
+#else
+    storage_path = ".";
+#endif
 
     if (!QDir(storage_path).exists()) {
         QDir().mkpath(storage_path);
