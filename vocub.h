@@ -10,7 +10,6 @@ public:
     bool flag;
     QString title;
     QString description;
-    QString table_name;
 };
 
 #endif // VOCUB_H

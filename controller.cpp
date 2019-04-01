@@ -40,10 +40,17 @@ Controller::Controller(QObject *parent) : QObject(parent) {
     }
     vocubs_model = new VocubsModel(&current_vocubs_);
     getVocubs();
+    current_words_.clear();
+    for(auto vocub : current_vocubs_)
+    {
+        if(vocub.flag)
+        {
+            getWords(vocub.title);
+        }
+    }
 }
 
 void Controller::getWords(QString vocub_title) {
-    current_words_.clear();
     QSqlQuery q;
     q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
     while(q.next()) {
@@ -64,7 +71,6 @@ void Controller::getVocubs() {
         v.flag = q.value(0).toBool();
         v.title = q.value(1).toString();
         v.description = q.value(2).toString();
-        v.table_name = q.value(3).toString();
         current_vocubs_.push_back(v);
     }
     vocubs_model->notifyChange();
