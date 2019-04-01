@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.12
 
 Item {
     property string current_word1: ""
@@ -12,46 +12,62 @@ Item {
     }
     Rectangle {
         anchors.fill: parent
-        color: "cyan"
+        color: "gainsboro"
         Text {
+            id: previousWord
             anchors.bottom: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: fraction * 2
             text: previous_word1+" - "+previous_word2
+            color: "gray"
         }
         Text {
-            id: moving_text
-            anchors.top: parent.verticalCenter
+            id: currentWord
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.verticalCenter
             font.pixelSize : fraction * 4
             text: current_word1
-            MouseArea { id: mouseArea; anchors.fill: parent }
-            states: State {
-                name: "up";
-                PropertyChanges { target: moving_text; color: "red" }
-                AnchorChanges { target: moving_text; anchors.top: parent.top }
-            }
-            transitions: Transition {
-
-                from: ""; to: "up";
-
-                ParallelAnimation {
-                    //                                   NumberAnimation { properties: "y"; duration: 500; easing.type: Easing.InOutQuad }
-                    ColorAnimation { duration: 500 }
-                    AnchorAnimation { duration: 500 }
+            states: [
+                State {
+                    name: "up";
+                    PropertyChanges {
+                        target: currentWord;
+                        color: "gray";
+                        font.pixelSize: fraction * 2 // цифровые значения меняются в NumberAnimation
+                    }
+                    AnchorChanges {
+                        target: currentWord;
+                        anchors.top: undefined // если якорь меняется, то необходимо старый якорь обнулить
+                        anchors.bottom: parent.verticalCenter // выставляем новый якорь
+                    }
                 }
-            }
+            ]
+            transitions: [
+                Transition {
+                    from: ""; to: "up";
+                    ParallelAnimation {
+                        ColorAnimation { duration: 500 }
+                        AnchorAnimation { duration: 500 }
+                        NumberAnimation { properties: "font.pixelSize"; duration: 500}
+                    }
+                    onRunningChanged: { // сигнал, испускаемый при старте и стопе анимации
+                        if (currentWord.state == "up" && !running) { // определяем окончание анимации в состояние "up"
+                            var word = controller.getNextWord() // берём следующее слово
+                            previous_word1 = current_word1
+                            previous_word2 = current_word2
+                            current_word1 = word.native_word
+                            current_word2 = word.foreign_word
+                            currentWord.state = "" // возвращаем дефолтное состояние
+                        }
+                    }
+                }
+            ]
         }
         MouseArea {
             id: clickOnScreen
             anchors.fill: parent
             onClicked: {
-                var word = controller.getNextWord()
-                previous_word1 = current_word1
-                previous_word2 = current_word2
-                current_word1 = word.native_word
-                current_word2 = word.foreign_word
-                moving_text.state = "up"
+                currentWord.state = "up"
             }
         }
     }
