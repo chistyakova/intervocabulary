@@ -77,6 +77,10 @@ Item {
         }
         Button {
             text: "Добавить словарь"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
             onClicked: {
                 selected_vocabulary = -1
                 stack.push(vocabularySaveCancelContainer)
