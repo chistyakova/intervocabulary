@@ -27,20 +27,20 @@ Item {
             text: current_word1
             MouseArea { id: mouseArea; anchors.fill: parent }
             states: State {
-
-                              name: "up";
-                              PropertyChanges { target: moving_text; y: 100; color: "red" }
-
-                         }
+                name: "up";
+                PropertyChanges { target: moving_text; color: "red" }
+                AnchorChanges { target: moving_text; anchors.top: parent.top }
+            }
             transitions: Transition {
 
-                              from: ""; to: "up";
+                from: ""; to: "up";
 
-                              ParallelAnimation {
-                                   NumberAnimation { properties: "y"; duration: 500; easing.type: Easing.InOutQuad }
-                                   ColorAnimation { duration: 500 }
-                              }
-                         }
+                ParallelAnimation {
+                    //                                   NumberAnimation { properties: "y"; duration: 500; easing.type: Easing.InOutQuad }
+                    ColorAnimation { duration: 500 }
+                    AnchorAnimation { duration: 500 }
+                }
+            }
         }
         MouseArea {
             id: clickOnScreen
