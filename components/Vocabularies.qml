@@ -77,6 +77,7 @@ Item {
         }
         Button {
             text: "Добавить словарь"
+            font.pixelSize: fraction
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom

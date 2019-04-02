@@ -18,6 +18,7 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: fraction * 2
+            horizontalAlignment: Text.AlignHCenter
             text: previous_word1+"\n"+previous_word2
             color: "gray"
             states: [
@@ -46,6 +47,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.verticalCenter
             font.pixelSize : fraction * 4
+            horizontalAlignment: Text.AlignHCenter
             text: current_word1
             states: [
                 State {

@@ -25,10 +25,11 @@ Rectangle {
         id: mainComponent
         Rectangle {
             Column {
-                anchors.centerIn: parent
-                width: parent.width
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.right: parent.right
                 spacing: 5
-                padding : 5
+                anchors.margins: 5
                 Button {
                     width: parent.width
                     font.pixelSize: fraction

@@ -9,19 +9,28 @@ Item {
     function save() {
         console.log("SAVE WORD")
     }
-    ColumnLayout {
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
+    Column {
+        anchors.bottom: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.right: parent.right
+        spacing: 5
+        anchors.margins: 5
         Text {
+            width: parent.width
             text: "На родном языке"
         }
         TextField {
+            placeholderText: qsTr("Слово")
+            width: parent.width
             id: nativeWordTextField
         }
         Text {
+            width: parent.width
             text: "На иностранном"
         }
         TextField {
+            placeholderText: qsTr("Перевод")
+            width: parent.width
             id: foreignWordTextField
         }
     }

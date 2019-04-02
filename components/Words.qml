@@ -55,6 +55,11 @@ Item {
         }
         Button {
             text: "Добавить слово"
+            font.pixelSize: fraction
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
             onClicked: {
                 selected_word = -1
                 stack.push(wordSaveCancelContainer)
