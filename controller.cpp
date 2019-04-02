@@ -51,6 +51,7 @@ Controller::Controller(QObject *parent) : QObject(parent) {
 }
 
 void Controller::getWords(QString vocub_title) {
+    current_words_.clear(); // очищаем вектор со словами из предыдущего словаря
     QSqlQuery q;
     q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
     while(q.next()) {
