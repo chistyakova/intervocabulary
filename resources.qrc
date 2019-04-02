@@ -12,7 +12,6 @@
         <file>svg/edit.svg</file>
         <file>svg/add.svg</file>
         <file>components/Words.qml</file>
-        <file>svg/list.svg</file>
         <file>components/CloseContainer.qml</file>
         <file>svg/close.svg</file>
         <file>components/Training001.qml</file>

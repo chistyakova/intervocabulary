@@ -30,11 +30,6 @@ Item {
                                 text: title
                                 font.pixelSize: fraction
                             }
-                        }
-                        Image {
-                            source: "qrc:/svg/list.svg"
-                            sourceSize.width: fraction
-                            sourceSize.height: fraction
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
@@ -45,9 +40,6 @@ Item {
                                 }
                             }
                         }
-
-
-
                         Image {
                             source: "qrc:///svg/edit.svg"
                             sourceSize.width: fraction
