@@ -78,10 +78,7 @@ Item {
         Button {
             text: "Добавить словарь"
             font.pixelSize: fraction
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.margins: 5
+            implicitWidth: parent.width // Button не имеет поля width, вместо него это!
             onClicked: {
                 selected_vocabulary = -1
                 stack.push(vocabularySaveCancelContainer)

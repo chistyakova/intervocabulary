@@ -21,8 +21,7 @@ Item {
             }
             Rectangle {
                 Layout.fillWidth: true
-                anchors.top: backButton.top
-                anchors.bottom: backButton.bottom
+                height: backButton.height
 
                 color: "lightblue"
                 Text {
