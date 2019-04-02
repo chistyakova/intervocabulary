@@ -13,8 +13,9 @@ Item {
             model: vocubsModel
             delegate: Component {
                 Rectangle {
-                    width: parent.width
-                    height: 48
+                    width: vocabulariesList.width
+                    height: fraction * 2
+                    color: index % 2 == 0 ? "#efefef" : "#f8f8f8" // чередуем цвет полосок в ListView
                     RowLayout {
                         anchors.fill: parent
                         Image {
@@ -25,6 +26,7 @@ Item {
                         Rectangle {
                             Layout.fillWidth: true
                             height: fraction
+                            color: "transparent"
                             Text {
                                 anchors.centerIn: parent
                                 text: title
