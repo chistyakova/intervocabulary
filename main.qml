@@ -34,7 +34,10 @@ Rectangle {
                     width: parent.width
                     font.pixelSize: fraction
                     text: "ТРЕНИРОВКА"
-                    onClicked: stack.push(training001CloseContainer)
+                    onClicked: {
+                        controller.getWords()
+                        stack.push(training001CloseContainer)
+                    }
                 }
                 Button {
                     width: parent.width

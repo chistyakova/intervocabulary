@@ -63,6 +63,30 @@ void Controller::getWords(QString vocub_title) {
     words_model->notifyChange();
 }
 
+void Controller::getWords() {
+    current_words_.clear();
+    QSqlQuery q;
+    q.exec("SELECT flag, title FROM settings");
+    QStringList selected_vocubs_titles;
+    while(q.next()) {
+        bool is_vocub_selected = q.value(0).toBool();
+        if (is_vocub_selected) {
+            QString vocub_title = q.value(1).toString();
+            selected_vocubs_titles.append(vocub_title);
+        }
+    }
+    for (const auto& vocub_title : selected_vocubs_titles) {
+        q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
+        while(q.next()) {
+            Word w;
+            w.native_word_ = q.value(0).toString();
+            w.foreign_word_ = q.value(1).toString();
+            current_words_.push_back(w);
+        }
+    }
+    q.exec();
+}
+
 void Controller::getVocubs() {
     current_vocubs_.clear();
     QSqlQuery q;
@@ -78,10 +102,14 @@ void Controller::getVocubs() {
 }
 
 QVariantMap Controller::getNextWord() {
+    QVariantMap map;
+    if (!current_words_.length()){
+        // отправляем в qml пустой объект, если слов нет
+        return map;
+    }
     QRandomGenerator generator;
     int random = QRandomGenerator::global()->bounded(current_words_.length());
     qDebug() << "Total:" << current_words_.length() << " Random:" << random;
-    QVariantMap map;
     map.insert("native_word", current_words_.at(random).native_word_);
     map.insert("foreign_word", current_words_.at(random).foreign_word_);
     return map;

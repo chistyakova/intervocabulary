@@ -33,6 +33,10 @@ public:
     // и она загружает в current_words_ слова, соответствующие title словаря.
     Q_INVOKABLE void getWords(QString vocub_title);
 
+    // Заполняем current_words_ словами из всех выбранных словарей.
+    // Вызывается в main.qml перед открытием кадра тренировки.
+    Q_INVOKABLE void getWords();
+
     int getTileSize();
     WordsModel *words_model;
     VocubsModel *vocubs_model;
