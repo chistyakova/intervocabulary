@@ -19,9 +19,17 @@ Item {
                     RowLayout {
                         anchors.fill: parent
                         Image {
-                            source: "qrc:/svg/select.svg"
+                            source: flag ? "qrc:/svg/check.svg" : "qrc:/svg/uncheck.svg"
                             sourceSize.width: fraction
                             sourceSize.height: fraction
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    selected_vocabulary = index
+                                    controller.setVocubFlag(
+                                                vocubsModel.get(selected_vocabulary).title, !flag)
+                                }
+                            }
                         }
                         Rectangle {
                             Layout.fillWidth: true
