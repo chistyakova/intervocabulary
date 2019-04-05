@@ -157,14 +157,14 @@ void Controller::saveWord(QString vocabulary_title, QString native_word, QString
 }
 
 void Controller::toggleVocubFlag(QString vocabulary_title) {
-    QSqlQuery q;
-    if (!q.exec("UPDATE settings SET flag=NOT flag WHERE title='"+vocabulary_title+"';")) {
-        qDebug() << q.lastError();
-    }
     for(int i = 0; i < current_vocubs_.size(); ++i) {
         Vocub *vocub = &current_vocubs_[i];
         if(vocub->title == vocabulary_title) {
-            vocub->flag = !(vocub->flag);
+            bool flag = vocub->flag = !(vocub->flag);
+            QSqlQuery q;
+            if (!q.exec("UPDATE settings SET flag="+QString::number(flag)+" WHERE title='"+vocabulary_title+"';")) {
+                qDebug() << q.lastError();
+            }
             vocubs_model->notifyChange();
             break;
         }
