@@ -7,7 +7,7 @@ class Vocub
 {
 public:
     Vocub();
-    int flag;
+    bool flag;
     QString title;
     QString description;
 };

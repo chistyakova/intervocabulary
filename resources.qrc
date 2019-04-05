@@ -17,7 +17,7 @@
         <file>components/Training001.qml</file>
         <file>svg/next.svg</file>
         <file>components/MyButton.qml</file>
-        <file>svg/check.svg</file>
-        <file>svg/uncheck.svg</file>
+        <file>svg/unchecked.svg</file>
+        <file>svg/checked.svg</file>
     </qresource>
 </RCC>

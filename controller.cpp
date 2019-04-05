@@ -75,6 +75,7 @@ void Controller::getWords() {
             selected_vocubs_titles.append(vocub_title);
         }
     }
+    qDebug() << selected_vocubs_titles;
     for (const auto& vocub_title : selected_vocubs_titles) {
         q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
         while(q.next()) {
@@ -155,16 +156,15 @@ void Controller::saveWord(QString vocabulary_title, QString native_word, QString
     words_model->notifyChange();
 }
 
-void Controller::setVocubFlag(QString vocabulary_title, int flag) {
+void Controller::toggleVocubFlag(QString vocabulary_title) {
     QSqlQuery q;
-    if (!q.exec("UPDATE settings SET flag='"+QString::number(flag)+"' WHERE title='"+vocabulary_title+"';")) {
+    if (!q.exec("UPDATE settings SET flag=NOT flag WHERE title='"+vocabulary_title+"';")) {
         qDebug() << q.lastError();
     }
-    qDebug() << "UPDATE settings SET flag='"+QString::number(flag)+"' WHERE title='"+vocabulary_title+"';";
-    for(auto vocub : current_vocubs_)
-    {
-        if(vocub.title == vocabulary_title) {
-            vocub.flag = flag;
+    for(int i = 0; i < current_vocubs_.size(); ++i) {
+        Vocub *vocub = &current_vocubs_[i];
+        if(vocub->title == vocabulary_title) {
+            vocub->flag = !(vocub->flag);
             vocubs_model->notifyChange();
             break;
         }

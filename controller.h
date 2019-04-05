@@ -37,8 +37,8 @@ public:
     // Вызывается в main.qml перед открытием кадра тренировки.
     Q_INVOKABLE void getWords();
 
-    // Выставляем признак используемости словаря
-    Q_INVOKABLE void setVocubFlag(QString vocabulary_title, int flag);
+    // Инвертируем признак используемости словаря.
+    Q_INVOKABLE void toggleVocubFlag(QString vocabulary_title);
 
     int getTileSize();
     WordsModel *words_model;

@@ -19,15 +19,16 @@ Item {
                     RowLayout {
                         anchors.fill: parent
                         Image {
-                            source: flag ? "qrc:/svg/check.svg" : "qrc:/svg/uncheck.svg"
+                            source: flag ? "qrc:/svg/checked.svg" : "qrc:/svg/unchecked.svg"
                             sourceSize.width: fraction
                             sourceSize.height: fraction
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
+                                    console.log(flag)
                                     selected_vocabulary = index
-                                    controller.setVocubFlag(
-                                                vocubsModel.get(selected_vocabulary).title, !flag)
+                                    controller.toggleVocubFlag(
+                                                vocubsModel.get(selected_vocabulary).title)
                                 }
                             }
                         }
