@@ -102,7 +102,7 @@ Item {
                 flag: ""
                 title: {
                     if (selected_vocabulary > -1)
-                        vocabulariesModel.get(selected_vocabulary).title
+                        vocubsModel.get(selected_vocabulary).title
                     else
                         ""
                 }
