@@ -14,16 +14,16 @@ Item {
             spacing: 0
             Button {
                 id: backButton
-                icon.source: "qrc:/svg/next.svg"
-                icon.width: fraction
-                icon.height: fraction
+                icon.source: "qrc:/svg/back.svg"
+                icon.width: fraction * 2
+                icon.height: fraction * 2
                 onClicked: stack.pop()
             }
             Rectangle {
                 Layout.fillWidth: true
                 height: backButton.height
 
-                color: "lightblue"
+                color: "gainsboro"
                 Text {
                     anchors.centerIn: parent
                     color: "blue"

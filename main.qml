@@ -9,8 +9,8 @@ Rectangle {
 
     // Задание ширины и высоты окна.
     // Только для Desktop, на телефоне не применяется.
-    width: Screen.desktopAvailableWidth / 4
-    height: Screen.desktopAvailableHeight / 2
+    height: Screen.desktopAvailableHeight * 0.75
+    width:  9 * height / 16
 
     property int fraction: mainRectangle.height / 20
     property alias rootWidth: mainRectangle.width
@@ -57,7 +57,7 @@ Rectangle {
 
     Component {
         id: trainingPoppable
-        TitleContainer {
+        BackContainer {
             title: ""
             content: Rectangle {
                 color: "red"
@@ -70,7 +70,7 @@ Rectangle {
 
     Component {
         id: vocabulariesTitleContainer
-        TitleContainer {
+        BackContainer {
             title: "МОИ СЛОВАРИ"
             content: Vocabularies {}
         }
@@ -78,7 +78,7 @@ Rectangle {
 
     Component {
         id: aboutTitleContainer
-        TitleContainer {
+        BackContainer {
             title: "О ПРОГРАММЕ"
             content: About {}
         }
@@ -86,7 +86,7 @@ Rectangle {
 
     Component {
         id: training001CloseContainer
-        CloseContainer {
+        BackContainer {
             content: Training001 {}
         }
     }

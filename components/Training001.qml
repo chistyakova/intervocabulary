@@ -16,8 +16,9 @@ Item {
         Text {
             id: previousWord
             anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: fraction * 2
+            width: parent.width
+            font.pixelSize: fraction * 3
+            fontSizeMode: Text.HorizontalFit
             horizontalAlignment: Text.AlignHCenter
             text: previous_word1+"\n"+previous_word2
             color: "gray"
@@ -44,9 +45,10 @@ Item {
         }
         Text {
             id: currentWord
-            anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.verticalCenter
-            font.pixelSize : fraction * 4
+            width: parent.width
+            font.pixelSize: fraction * 3
+            fontSizeMode: Text.HorizontalFit
             horizontalAlignment: Text.AlignHCenter
             text: current_word1
             states: [
@@ -55,7 +57,7 @@ Item {
                     PropertyChanges {
                         target: currentWord;
                         color: "gray";
-                        font.pixelSize: fraction * 2 // цифровые значения меняются в NumberAnimation
+                        //font.pixelSize: fraction * 2 // цифровые значения меняются в NumberAnimation
                     }
                     AnchorChanges {
                         target: currentWord;
@@ -99,4 +101,9 @@ Item {
             }
         }
     }
+//    Text {
+//        text: "asasd"
+//        anchors.right: parent.right
+//        anchors.top: mainRectangle.top
+//    }
 }
