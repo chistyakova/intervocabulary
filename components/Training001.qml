@@ -7,8 +7,8 @@ Item {
     property string previous_word2: ""
     Component.onCompleted: {
         var word = controller.getNextWord()
-        current_word1 = word.foreign_word
-        current_word2 = word.native_word
+        current_word1 = word.native_word
+        current_word2 = word.foreign_word
     }
     Rectangle {
         anchors.fill: parent
