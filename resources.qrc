@@ -18,5 +18,6 @@
         <file>svg/checked.svg</file>
         <file>components/BackContainer.qml</file>
         <file>svg/back.svg</file>
+        <file>svg/swap-horizontal.svg</file>
     </qresource>
 </RCC>

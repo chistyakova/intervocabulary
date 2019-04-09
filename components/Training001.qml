@@ -5,10 +5,17 @@ Item {
     property string current_word2: ""
     property string previous_word1: ""
     property string previous_word2: ""
+    property bool swap: false
     Component.onCompleted: {
         var word = controller.getNextWord()
-        current_word1 = word.native_word
-        current_word2 = word.foreign_word
+        if(swap)
+        {
+            current_word1 = word.native_word
+            current_word2 = word.foreign_word
+        } else {
+            current_word1 = word.foreign_word
+            current_word2 = word.native_word
+        }
     }
     Rectangle {
         anchors.fill: parent
@@ -81,8 +88,16 @@ Item {
                             var word = controller.getNextWord() // берём следующее слово
                             previous_word1 = current_word1
                             previous_word2 = current_word2
-                            current_word1 = word.native_word
-                            current_word2 = word.foreign_word
+
+                            if(swap)
+                            {
+                                current_word1 = word.native_word
+                                current_word2 = word.foreign_word
+                            } else {
+                                current_word1 = word.foreign_word
+                                current_word2 = word.native_word
+                            }
+
                             currentWord.state = "" // возвращаем дефолтное состояние
                             previousWord.state = "visible"
                             currentWord.text = current_word1
@@ -98,6 +113,20 @@ Item {
                 currentWord.state = "up"
                 previousWord.state = "invisible"
                 currentWord.text = current_word1 + "\n" + current_word2
+            }
+        }
+        Image {
+            id: swapWords
+            source: "qrc:/svg/swap-horizontal.svg"
+            anchors.top: parent.top
+            anchors.right: parent.right
+            sourceSize.width: fraction
+            sourceSize.height: fraction
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    swap = !swap
+                }
             }
         }
     }
