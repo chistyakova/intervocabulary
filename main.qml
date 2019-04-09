@@ -86,7 +86,7 @@ Rectangle {
 
     Component {
         id: training001CloseContainer
-        BackContainer {
+        Container {
             content: Training001 {}
         }
     }
