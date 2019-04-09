@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
+import QtQuick.Dialogs 1.2
 
 Item {
     property int selected_word: 0
@@ -44,8 +45,9 @@ Item {
                             sourceSize.height: 24
                             MouseArea {
                                 anchors.fill: parent
-                                onPressAndHold: {
-                                    console.log("delete "+index)
+                                onClicked: {
+                                    //console.log("delete "+index)
+                                    dialogAndroid.open()
                                 }
                             }
                         }
@@ -62,6 +64,15 @@ Item {
                 stack.push(wordSaveCancelContainer)
             }
         }
+    }
+    Dialog {
+        id: dialogAndroid
+        Text: {
+            text: "Choose a date"
+        }
+        standardButtons: StandardButton.Cancel | StandardButton.Ok
+
+
     }
     Component {
         id: wordSaveCancelContainer

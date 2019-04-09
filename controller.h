@@ -29,6 +29,9 @@ public:
     //   foreign_word     - перевод слова;
     Q_INVOKABLE void saveWord(QString vocabulary_title, QString native_word, QString foreign_word);
 
+    // Удаление слова из словаря. Ищем по иностранному слову, потому что может быть несколько слов с одним переводом
+    Q_INVOKABLE void removeWord(QString vocabulary_title, QString foreign_word);
+
     // Эту функцию вызываем по нажатию на кнопку редактирования словаря,
     // и она загружает в current_words_ слова, соответствующие title словаря.
     Q_INVOKABLE void getWords(QString vocub_title);

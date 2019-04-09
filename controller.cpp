@@ -156,6 +156,21 @@ void Controller::saveWord(QString vocabulary_title, QString native_word, QString
     words_model->notifyChange();
 }
 
+void Controller::removeWord(QString vocabulary_title, QString foreign_word) {
+    for(int i = 0; i < current_words_.size(); ++i) {
+        Word *word = &current_words_[i];
+        if(word->foreign_word_ == foreign_word) {
+            current_words_.remove(i);
+            QSqlQuery q;
+            if (!q.exec("DELETE FROM '"+vocabulary_title+"' WHERE foreign_word='"+foreign_word+"';")) {
+                qDebug() << q.lastError();
+            }
+            words_model->notifyChange();
+            break;
+        }
+    }
+}
+
 void Controller::toggleVocubFlag(QString vocabulary_title) {
     for(int i = 0; i < current_vocubs_.size(); ++i) {
         Vocub *vocub = &current_vocubs_[i];
