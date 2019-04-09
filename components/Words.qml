@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.12
-import QtQuick.Dialogs 1.2
+import QtQuick.Dialogs 1.3
 
 Item {
     property int selected_word: 0
@@ -67,7 +67,7 @@ Item {
     }
     Dialog {
         id: dialogAndroid
-        Text: {
+        contentItem: Text {
             text: "Choose a date"
         }
         standardButtons: StandardButton.Cancel | StandardButton.Ok

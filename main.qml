@@ -7,6 +7,11 @@ import "components"
 Rectangle {
     id: mainRectangle
 
+    // Задание ширины и высоты окна.
+    // Только для Desktop, на телефоне не применяется.
+    //height: Screen.desktopAvailableHeight * 0.75
+    //width:  (9 * Screen.desktopAvailableHeight * 0.75) / 16
+
     property int fraction: mainRectangle.height / 20
     property alias rootWidth: mainRectangle.width
     property alias rootHeight: mainRectangle.height
