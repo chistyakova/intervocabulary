@@ -10,7 +10,7 @@ Item {
                 source: "qrc:/svg/swap-horizontal.svg"
                 anchors.right: parent.right
                 sourceSize.width: parent.height
-                sourceSize.height: sourceSize.width
+                sourceSize.height: parent.height
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
@@ -22,22 +22,26 @@ Item {
         }
     }
 
-    property string current_word1: ""
-    property string current_word2: ""
+    property var word: controller.getNextWord()
+
+    property string current_word1: word.foreign_word
+    property string current_word2: word.native_word
     property string previous_word1: ""
     property string previous_word2: ""
 
-    Component.onCompleted: {
-        var word = controller.getNextWord()
-        if(swap)
-        {
-            current_word1 = word.native_word
-            current_word2 = word.foreign_word
-        } else {
-            current_word1 = word.foreign_word
-            current_word2 = word.native_word
-        }
-    }
+
+
+//    Component.onCompleted: {
+//        var word = controller.getNextWord()
+//        if(swap)
+//        {
+//            current_word1 = word.native_word
+//            current_word2 = word.foreign_word
+//        } else {
+//            current_word1 = word.foreign_word
+//            current_word2 = word.native_word
+//        }
+//    }
 
     property Item body: Component {
         Rectangle {
@@ -108,7 +112,7 @@ Item {
                         }
                         onRunningChanged: { // сигнал, испускаемый при старте и стопе анимации
                             if (currentWord.state == "up" && !running) { // определяем окончание анимации в состояние "up"
-                                var word = controller.getNextWord() // берём следующее слово
+                                word = controller.getNextWord() // берём следующее слово
                                 previous_word1 = current_word1
                                 previous_word2 = current_word2
 
