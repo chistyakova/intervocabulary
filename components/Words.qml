@@ -26,12 +26,13 @@ Item {
                             Text {
                                 anchors.centerIn: parent
                                 text: native_word+" - "+foreign_word
+                                font.pixelSize: fraction
                             }
                         }
                         Image {
                             source: "qrc:///svg/edit.svg"
-                            sourceSize.width: 24
-                            sourceSize.height: 24
+                            sourceSize.width: fraction
+                            sourceSize.height: fraction
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
@@ -42,8 +43,8 @@ Item {
                         }
                         Image {
                             source: "qrc:///svg/delete.svg"
-                            sourceSize.width: 24
-                            sourceSize.height: 24
+                            sourceSize.width: fraction
+                            sourceSize.height: fraction
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
