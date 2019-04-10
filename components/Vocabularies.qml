@@ -92,7 +92,7 @@ Item {
         id: wordsTitleContainer
         BackContainer {
             title: vocubsModel.get(selected_vocabulary).title
-            content: Words {}
+            content: Words { vocub_title: vocubsModel.get(selected_vocabulary).title }
         }
     }
     Component {

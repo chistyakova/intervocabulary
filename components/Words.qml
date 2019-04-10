@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.3
 
 Item {
     property int selected_word: 0
+    property string vocub_title
     ColumnLayout {
         anchors.fill: parent
         ListView {
@@ -46,7 +47,6 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    //console.log("delete "+index)
                                     dialogAndroid.open()
                                 }
                             }
@@ -65,14 +65,15 @@ Item {
             }
         }
     }
-    Dialog {
+    MessageDialog {
         id: dialogAndroid
-        contentItem: Text {
-            text: "Choose a date"
+        text: "Удалить?"
+        standardButtons: StandardButton.Yes | StandardButton.No
+        onYes: {
+            controller.removeWord(vocub_title, wordsModel.get(selected_word).foreign_word)
+            dialogAndroid.close()
         }
-        standardButtons: StandardButton.Cancel | StandardButton.Ok
-
-
+        onNo: dialogAndroid.close()
     }
     Component {
         id: wordSaveCancelContainer
