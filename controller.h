@@ -40,17 +40,27 @@ public:
     // Вызывается в main.qml перед открытием кадра тренировки.
     Q_INVOKABLE void getWords();
 
+    // Перемешиваем слова в current_words_
+    Q_INVOKABLE void shuffleWords(bool shuffle);
+
     // Инвертируем признак используемости словаря.
     Q_INVOKABLE void toggleVocubFlag(QString vocabulary_title);
 
     int getTileSize();
     WordsModel *words_model;
     VocubsModel *vocubs_model;
+
+    struct QPairFirstComparer {
+        template<typename T1, typename T2>
+        bool operator()(const QPair<T1,T2> & a, const QPair<T1,T2> & b) const { return a.first < b.first; }
+    };
+
 private:
-    QVector<Word> current_words_;
+    QVector<QPair <int, Word>> current_words_;
     QVector<Vocub> current_vocubs_;
     QSqlDatabase db_;
     int tile_size_;
+    int next_word_index_;
 
     void getVocubs();
 

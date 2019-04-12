@@ -3,13 +3,13 @@
 QVariantMap WordsModel::get(int index) {
     QVariantMap map;
     if (index >= 0 && index < words_->count()) {
-        map.insert("native_word", words_->at(index).native_word_);
-        map.insert("foreign_word", words_->at(index).foreign_word_);
+        map.insert("native_word", words_->at(index).second.native_word_);
+        map.insert("foreign_word", words_->at(index).second.foreign_word_);
     }
     return map;
 }
 
-WordsModel::WordsModel(QVector<Word> *words, QObject *parent):
+WordsModel::WordsModel(QVector<QPair <int, Word>> *words, QObject *parent):
   QAbstractListModel(parent) {
   words_ = words;
 }
@@ -34,10 +34,10 @@ QVariant WordsModel::data(const QModelIndex &index, int role) const {
     }
     switch (role) {
         case native_word: {
-            return words_->at(index.row()).native_word_;
+            return words_->at(index.row()).second.native_word_;
         }
         case foreign_word: {
-            return words_->at(index.row()).foreign_word_;
+            return words_->at(index.row()).second.foreign_word_;
         }
         default:
             return QVariant();

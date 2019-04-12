@@ -1,9 +1,11 @@
 import QtQuick 2.12
+import QtQuick.Layouts 1.12
 
 Item {
     property bool swap: false
+    property bool shuffle: false
     property Item header: Component {
-        Rectangle {
+        RowLayout {
             anchors.fill: parent
             Image {
                 id: swapWords
@@ -14,8 +16,21 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        console.log(swap)
                         swap = !swap
+                    }
+                }
+            }
+            Image {
+                id: shuffleWords
+                source: "qrc:/svg/shuffle-variant.svg"
+                anchors.right: swapWords.left
+                sourceSize.width: parent.height
+                sourceSize.height: parent.height
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        shuffle = !shuffle
+                        controller.shuffleWords(shuffle)
                     }
                 }
             }

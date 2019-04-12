@@ -4,8 +4,9 @@
 #include <QRandomGenerator>
 #include "controller.h"
 #include <math.h>
+#include <algorithm>    // std::random_shuffle
 
-Controller::Controller(QObject *parent) : QObject(parent) {
+Controller::Controller(QObject *parent) : QObject(parent), next_word_index_(0) {
     // Инициализируем базу данных.
     db_ = QSqlDatabase::addDatabase("QSQLITE");
 
@@ -54,11 +55,12 @@ void Controller::getWords(QString vocub_title) {
     current_words_.clear(); // очищаем вектор со словами из предыдущего словаря
     QSqlQuery q;
     q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
+    int i=0;
     while(q.next()) {
         Word w;
         w.native_word_ = q.value(0).toString();
         w.foreign_word_ = q.value(1).toString();
-        current_words_.push_back(w);
+        current_words_.push_back(QPair<int, Word>(i++, w));
     }
     words_model->notifyChange();
 }
@@ -78,11 +80,12 @@ void Controller::getWords() {
     qDebug() << selected_vocubs_titles;
     for (const auto& vocub_title : selected_vocubs_titles) {
         q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
+        int i=0;
         while(q.next()) {
             Word w;
             w.native_word_ = q.value(0).toString();
             w.foreign_word_ = q.value(1).toString();
-            current_words_.push_back(w);
+            current_words_.push_back(QPair<int, Word>(i++, w));
         }
     }
     q.exec();
@@ -102,17 +105,24 @@ void Controller::getVocubs() {
     vocubs_model->notifyChange();
 }
 
+void Controller::shuffleWords(bool shuffle)
+{
+    if(shuffle) std::random_shuffle(current_words_.begin(), current_words_.end());
+    else qSort(current_words_.begin(), current_words_.end(), QPairFirstComparer());
+    next_word_index_ = 0;
+}
+
 QVariantMap Controller::getNextWord() {
     QVariantMap map;
     if (!current_words_.length()){
         // отправляем в qml пустой объект, если слов нет
         return map;
     }
-    QRandomGenerator generator;
-    int random = QRandomGenerator::global()->bounded(current_words_.length());
-    qDebug() << "Total:" << current_words_.length() << " Random:" << random;
-    map.insert("native_word", current_words_.at(random).native_word_);
-    map.insert("foreign_word", current_words_.at(random).foreign_word_);
+
+    if(next_word_index_ >= current_words_.size()) next_word_index_ = 0;
+    qDebug() << next_word_index_;
+    map.insert("native_word", current_words_.at(next_word_index_).second.native_word_);
+    map.insert("foreign_word", current_words_.at(next_word_index_++).second.foreign_word_);
     return map;
 }
 
@@ -152,13 +162,13 @@ void Controller::saveWord(QString vocabulary_title, QString native_word, QString
     Word w;
     w.native_word_ = native_word;
     w.foreign_word_ = foreign_word;
-    current_words_.push_back(w);
+    current_words_.push_back(QPair<int, Word>(current_words_.size(),w));
     words_model->notifyChange();
 }
 
 void Controller::removeWord(QString vocabulary_title, QString foreign_word) {
     for(int i = 0; i < current_words_.size(); ++i) {
-        Word *word = &current_words_[i];
+        Word *word = &current_words_[i].second;
         if(word->foreign_word_ == foreign_word) {
             current_words_.remove(i);
             QSqlQuery q;

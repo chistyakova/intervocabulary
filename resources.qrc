@@ -20,5 +20,6 @@
         <file>svg/back.svg</file>
         <file>svg/swap-horizontal.svg</file>
         <file>components/Container.qml</file>
+        <file>svg/shuffle-variant.svg</file>
     </qresource>
 </RCC>

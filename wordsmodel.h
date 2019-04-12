@@ -10,7 +10,7 @@ class WordsModel : public QAbstractListModel
   Q_OBJECT
 public:
   Q_INVOKABLE QVariantMap get(int index);
-  WordsModel(QVector<Word> *, QObject *parent = nullptr);
+  WordsModel(QVector<QPair <int, Word>> *, QObject *parent = nullptr);
   virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
   enum Roles {
     native_word = Qt::UserRole + 1,
@@ -21,7 +21,7 @@ public:
 
   void notifyChange();
 private:
-  QVector<Word> *words_;
+  QVector<QPair <int, Word>> *words_;
 };
 
 #endif // WORDSMODEL_H
