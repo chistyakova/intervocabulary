@@ -13,13 +13,11 @@
         <file>components/Words.qml</file>
         <file>svg/close.svg</file>
         <file>components/Training001.qml</file>
-        <file>components/MyButton.qml</file>
         <file>svg/unchecked.svg</file>
         <file>svg/checked.svg</file>
-        <file>components/BackContainer.qml</file>
         <file>svg/back.svg</file>
         <file>svg/swap-horizontal.svg</file>
-        <file>components/Container.qml</file>
         <file>svg/shuffle-variant.svg</file>
+        <file>components/SlideContainer.qml</file>
     </qresource>
 </RCC>

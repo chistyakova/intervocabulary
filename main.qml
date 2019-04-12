@@ -56,37 +56,22 @@ Rectangle {
     }
 
     Component {
-        id: trainingPoppable
-        BackContainer {
-            title: ""
-            content: Rectangle {
-                color: "red"
-                Text {
-                    text: "dynamic comonent"
-                }
-            }
-        }
-    }
-
-    Component {
         id: vocabulariesTitleContainer
-        BackContainer {
-            title: "МОИ СЛОВАРИ"
+        SlideContainer {
             content: Vocabularies {}
         }
     }
 
     Component {
         id: aboutTitleContainer
-        BackContainer {
-            title: "О ПРОГРАММЕ"
+        SlideContainer {
             content: About {}
         }
     }
 
     Component {
         id: training001CloseContainer
-        Container {
+        SlideContainer {
             content: Training001 {}
         }
     }

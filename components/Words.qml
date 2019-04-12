@@ -6,66 +6,78 @@ import QtQuick.Dialogs 1.3
 Item {
     property int selected_word: 0
     property string vocub_title
-    ColumnLayout {
-        anchors.fill: parent
-        ListView {
-            id: wordsList
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            model: wordsModel
-            delegate: Component {
-                Rectangle {
-                    width: parent.width
-                    height: fraction * 2
-                    RowLayout {
+    property Item header: Component {
+        Rectangle {
+            anchors.fill: parent
+            Text {
+                anchors.centerIn: parent
+                text: vocub_title
+            }
+        }
+    }
+    property Item body: Component {
+        ColumnLayout {
+            anchors.fill: parent
+            ListView {
+                id: wordsList
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                model: wordsModel
+                delegate: Component {
+                    Rectangle {
                         width: parent.width
-                        height: parent.height
-                        Rectangle {
-                            Layout.fillWidth: true
+                        height: fraction * 2
+                        RowLayout {
+                            width: parent.width
                             height: parent.height
-                            Text {
-                                anchors.centerIn: parent
-                                text: native_word+" - "+foreign_word
-                                font.pixelSize: fraction
-                            }
-                        }
-                        Image {
-                            source: "qrc:///svg/edit.svg"
-                            sourceSize.width: fraction
-                            sourceSize.height: fraction
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    selected_word = index
-                                    stack.push(wordSaveCancelContainer)
+                            Rectangle {
+                                Layout.fillWidth: true
+                                height: parent.height
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: native_word+" - "+foreign_word
+                                    font.pixelSize: fraction
                                 }
                             }
-                        }
-                        Image {
-                            source: "qrc:///svg/delete.svg"
-                            sourceSize.width: fraction
-                            sourceSize.height: fraction
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    dialogAndroid.open()
+                            Image {
+                                source: "qrc:///svg/edit.svg"
+                                sourceSize.width: fraction
+                                sourceSize.height: fraction
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: {
+                                        selected_word = index
+                                        stack.push(wordSaveCancelContainer)
+                                    }
+                                }
+                            }
+                            Image {
+                                source: "qrc:///svg/delete.svg"
+                                sourceSize.width: fraction
+                                sourceSize.height: fraction
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: {
+                                        dialogAndroid.open()
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
-        Button {
-            text: "Добавить слово"
-            font.pixelSize: fraction
-            implicitWidth: parent.width
-            onClicked: {
-                selected_word = -1
-                stack.push(wordSaveCancelContainer)
+            Button {
+                text: "Добавить слово"
+                font.pixelSize: fraction
+                implicitWidth: parent.width
+                onClicked: {
+                    selected_word = -1
+                    stack.push(wordSaveCancelContainer)
+                }
             }
         }
     }
+
     MessageDialog {
         id: dialogAndroid
         text: "Удалить?"
