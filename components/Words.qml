@@ -1,7 +1,7 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.0
+import QtQuick 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Dialogs 1.3
+import QtQuick.Controls 2.12
+
 
 Item {
     property int selected_word: 0
@@ -47,7 +47,7 @@ Item {
                                     anchors.fill: parent
                                     onClicked: {
                                         selected_word = index
-                                        stack.push(wordSaveCancelContainer)
+                                        editWord.open()
                                     }
                                 }
                             }
@@ -58,7 +58,7 @@ Item {
                                 MouseArea {
                                     anchors.fill: parent
                                     onClicked: {
-                                        dialogAndroid.open()
+                                        aboutDialog.open()
                                     }
                                 }
                             }
@@ -72,39 +72,38 @@ Item {
                 implicitWidth: parent.width
                 onClicked: {
                     selected_word = -1
-                    stack.push(wordSaveCancelContainer)
+                    editWord.open()
                 }
             }
-        }
-    }
-
-    MessageDialog {
-        id: dialogAndroid
-        text: "Удалить?"
-        standardButtons: StandardButton.Yes | StandardButton.No
-        onYes: {
-            controller.removeWord(vocub_title, wordsModel.get(selected_word).foreign_word)
-            dialogAndroid.close()
-        }
-        onNo: dialogAndroid.close()
-    }
-    Component {
-        id: wordSaveCancelContainer
-        SaveCancelContainer {
-            content: Word {
-                vocabulary_title: title
-                native_word: {
-                    if (selected_word > -1)
-                        wordsModel.get(selected_word).native_word
-                    else
-                        ""
+            Dialog {
+                id: editWord
+                modal: true
+                focus: true
+                title: "Добавить слово"
+                standardButtons: Dialog.Ok | Dialog.Cancel
+                parent: Overlay.overlay
+                width: parent.width
+                ColumnLayout {
+                    spacing: 20
+                    anchors.fill: parent
+                    TextField {
+                        id: nativeWord
+                        focus: true
+                        placeholderText: "На родном языке"
+                        Layout.fillWidth: true
+                        text: selected_word<0?"":wordsModel.get(selected_word).native_word
+                    }
+                    TextField {
+                        id: foreignWord
+                        placeholderText: "На иностранном языке"
+                        Layout.fillWidth: true
+                        text: selected_word<0?"":wordsModel.get(selected_word).foreign_word
+                    }
                 }
-                foreign_word: {
-                    if (selected_word > -1)
-                        wordsModel.get(selected_word).foreign_word
-                    else
-                        ""
-                }
+                onAccepted: controller.saveWord(
+                                vocub_title,
+                                nativeWord.text,
+                                foreignWord.text)
             }
         }
     }

@@ -1,18 +1,18 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.0
+import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
 
-Item {
+Page {
     property int selected_vocabulary: 0
-    property Item header: Component {
-        Rectangle {
-            anchors.fill: parent
-            Text {
-                anchors.centerIn: parent
-                text: "Словари"
-            }
-        }
-    }
+//    property Item header: Component {
+//        Rectangle {
+//            anchors.fill: parent
+//            Text {
+//                anchors.centerIn: parent
+//                text: "Словари"
+//            }
+//        }
+//    }
     property Item body: Component {
         ColumnLayout {
             anchors.fill: parent
@@ -69,7 +69,7 @@ Item {
                                     anchors.fill: parent
                                     onClicked: {
                                         selected_vocabulary = index
-                                        stack.push(vocabularySaveCancelContainer)
+                                        editVocub.open()
                                     }
                                 }
                             }
@@ -94,39 +94,52 @@ Item {
                 implicitWidth: parent.width // Button не имеет поля width, вместо него это!
                 onClicked: {
                     selected_vocabulary = -1
-                    stack.push(vocabularySaveCancelContainer)
+                    editVocub.open()
                 }
+            }
+            Dialog {
+                id: editVocub
+                modal: true
+                focus: true
+                title: "Добавить словарь"
+                standardButtons: Dialog.Ok | Dialog.Cancel
+                parent: Overlay.overlay
+                width: parent.width
+                ColumnLayout {
+                    spacing: 20
+                    anchors.fill: parent
+                    TextField {
+                        id: flagField
+                        placeholderText: "Язык"
+                        Layout.fillWidth: true
+                        text: selected_vocabulary<0?"":vocubsModel.get(selected_vocabulary).flag
+                    }
+                    TextField {
+                        id: titleField
+                        focus: true
+                        placeholderText: "Название словаря"
+                        Layout.fillWidth: true
+                        text: selected_vocabulary<0?"":vocubsModel.get(selected_vocabulary).title
+                    }
+                    TextField {
+                        id: descriptionFiled
+                        placeholderText: "Описание словаря"
+                        Layout.fillWidth: true
+                        text: selected_vocabulary<0?"":vocubsModel.get(selected_vocabulary).description
+                    }
+                }
+                onAccepted: controller.saveVocab(
+                                flagField.text,
+                                titleField.text,
+                                descriptionFiled.text)
             }
         }
     }
-
-//    Component {
-//        id: wordsTitleContainer
-//        BackContainer {
-//            title: vocubsModel.get(selected_vocabulary).title
-//            content: Words { vocub_title: vocubsModel.get(selected_vocabulary).title }
-//        }
-//    }
     Component {
         id: wordsTitleContainer
         SlideContainer {
             content: Words {
                 vocub_title: vocubsModel.get(selected_vocabulary).title
-            }
-        }
-    }
-    Component {
-        id: vocabularySaveCancelContainer
-        SaveCancelContainer {
-            content: Vocabulary {
-                flag: ""
-                title: {
-                    if (selected_vocabulary > -1)
-                        vocubsModel.get(selected_vocabulary).title
-                    else
-                        ""
-                }
-                description: ""
             }
         }
     }

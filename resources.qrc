@@ -3,9 +3,7 @@
         <file>main.qml</file>
         <file>components/Vocabularies.qml</file>
         <file>components/About.qml</file>
-        <file>components/Vocabulary.qml</file>
         <file>components/SaveCancelContainer.qml</file>
-        <file>components/Word.qml</file>
         <file>svg/select.svg</file>
         <file>svg/delete.svg</file>
         <file>svg/edit.svg</file>
