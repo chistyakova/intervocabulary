@@ -7,6 +7,8 @@ class Word
 {
 public:
     explicit Word();
+    bool is_learned;
+    int counter;
     QString native_word_;
     QString foreign_word_;
 };

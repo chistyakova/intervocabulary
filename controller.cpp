@@ -54,12 +54,14 @@ Controller::Controller(QObject *parent) : QObject(parent), next_word_index_(0) {
 void Controller::getWords(QString vocub_title) {
     current_words_.clear(); // очищаем вектор со словами из предыдущего словаря
     QSqlQuery q;
-    q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
+    q.exec("SELECT native_word, foreign_word, is_learned, counter FROM \""+vocub_title+"\"");
     int i=0;
     while(q.next()) {
         Word w;
-        w.native_word_ = q.value(0).toString();
+        w.native_word_  = q.value(0).toString();
         w.foreign_word_ = q.value(1).toString();
+        w.is_learned    = q.value(2).toBool();
+        w.counter       = q.value(3).toInt();
         current_words_.push_back(QPair<int, Word>(i++, w));
     }
     words_model->notifyChange();
@@ -79,12 +81,14 @@ void Controller::getWords() {
     }
     qDebug() << selected_vocubs_titles;
     for (const auto& vocub_title : selected_vocubs_titles) {
-        q.exec("SELECT native_word, foreign_word FROM \""+vocub_title+"\"");
+        q.exec("SELECT native_word, foreign_word, is_learned, counter FROM \""+vocub_title+"\"");
         int i=0;
         while(q.next()) {
             Word w;
-            w.native_word_ = q.value(0).toString();
+            w.native_word_  = q.value(0).toString();
             w.foreign_word_ = q.value(1).toString();
+            w.is_learned    = q.value(2).toBool();
+            w.counter       = q.value(3).toInt();
             current_words_.push_back(QPair<int, Word>(i++, w));
         }
     }
@@ -122,7 +126,10 @@ QVariantMap Controller::getNextWord() {
     if(next_word_index_ >= current_words_.size()) next_word_index_ = 0;
     qDebug() << next_word_index_;
     map.insert("native_word", current_words_.at(next_word_index_).second.native_word_);
-    map.insert("foreign_word", current_words_.at(next_word_index_++).second.foreign_word_);
+    map.insert("foreign_word", current_words_.at(next_word_index_).second.foreign_word_);
+    map.insert("is_learned", current_words_.at(next_word_index_).second.is_learned);
+    map.insert("counter", current_words_.at(next_word_index_).second.counter);
+    next_word_index_++;
     return map;
 }
 
@@ -141,7 +148,9 @@ void Controller::saveVocab(QString flag, QString title, QString description) {
     getVocubs();
     if (!q.exec("CREATE TABLE IF NOT EXISTS '"+table_name+"'("
                 "native_word text, "
-                "foreign_word text"
+                "foreign_word text, "
+                "is_learned INTEGER,"
+                "counter INTEGER"
                 ");")) {
         qDebug() << q.lastError();
     }
@@ -151,12 +160,14 @@ void Controller::saveWord(QString vocabulary_title, QString native_word, QString
     QSqlQuery q;
     if (!q.exec("CREATE TABLE IF NOT EXISTS \""+vocabulary_title+"\" ("
                 "native_word text, "
-                "foreign_word text"
+                "foreign_word text, "
+                "is_learned INTEGER,"
+                "counter INTEGER"
                 ");")) {
         qDebug() << q.lastError();
     }
-    if (!q.exec("INSERT INTO '"+vocabulary_title+"' (native_word, foreign_word) "
-                "VALUES ('"+native_word+"','"+foreign_word+"');")) {
+    if (!q.exec("INSERT INTO '"+vocabulary_title+"' (native_word, foreign_word, is_learned, counter) "
+                "VALUES ('"+native_word+"','"+foreign_word+"', 0, 0);")) {
         qDebug() << q.lastError();
     }
     Word w;
