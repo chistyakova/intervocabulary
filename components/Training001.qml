@@ -69,7 +69,7 @@ Item {
                 font.pixelSize: fraction * 3
                 fontSizeMode: Text.HorizontalFit
                 horizontalAlignment: Text.AlignHCenter
-                text: previous_word1+"\n"+previous_word2
+                text: previous_word1+"<br>"+previous_word2
                 color: "gray"
                 states: [
                     State { name: "visible"
@@ -99,7 +99,7 @@ Item {
                 font.pixelSize: fraction * 3
                 fontSizeMode: Text.HorizontalFit
                 horizontalAlignment: Text.AlignHCenter
-                text: current_word1
+                text: current_word1+"<br><font color='transparent'>"+current_word2+"</font>"
                 states: [
                     State {
                         name: "up";
@@ -142,7 +142,7 @@ Item {
 
                                 currentWord.state = "" // возвращаем дефолтное состояние
                                 previousWord.state = "visible"
-                                currentWord.text = current_word1
+                                currentWord.text = current_word1+"<br><font color='transparent'>"+current_word2+"</font>"
                             }
                         }
                     }
