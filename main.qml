@@ -10,6 +10,8 @@ ApplicationWindow {
     property alias rootWidth: mainRectangle.width
     property alias rootHeight: mainRectangle.height
 
+    property color mainBackground: 'white'
+
     height: 500
     width:  300
     visible: true
@@ -29,6 +31,7 @@ ApplicationWindow {
     Component {
         id: mainComponent
         Rectangle {
+            color: root.mainBackground
             Column {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left

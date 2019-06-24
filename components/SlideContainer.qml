@@ -7,7 +7,7 @@ Item {
     property Item content
     Rectangle {
         anchors.fill: parent
-        color: 'red'
+        color: root.mainBackground
         ColumnLayout {
             anchors.fill: parent
             spacing: 0
