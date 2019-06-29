@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 Item {
     property bool swap: false
     property bool shuffle: false
-    property Item header: Component {
+    property Component header: Component {
         RowLayout {
             anchors.fill: parent
             Image {
@@ -58,7 +58,7 @@ Item {
 //        }
 //    }
 
-    property Item body: Component {
+    property Component body: Component {
         Rectangle {
             anchors.fill: parent
             color: "gainsboro"

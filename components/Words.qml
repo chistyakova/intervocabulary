@@ -6,7 +6,7 @@ import QtQuick.Controls 2.12
 Item {
     property int selected_word: 0
     property string vocub_title
-    property Item header: Component {
+    property Component header: Component {
         Rectangle {
             anchors.fill: parent
             Text {
@@ -15,7 +15,7 @@ Item {
             }
         }
     }
-    property Item body: Component {
+    property Component body: Component {
         ColumnLayout {
             anchors.fill: parent
             ListView {
