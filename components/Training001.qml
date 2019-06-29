@@ -66,7 +66,7 @@ Item {
                 id: previousWord
                 anchors.top: parent.top
                 width: parent.width
-                font.pixelSize: fraction * 3
+                font.pixelSize: fraction * 2
                 fontSizeMode: Text.HorizontalFit
                 horizontalAlignment: Text.AlignHCenter
                 text: previous_word1+"<br>"+previous_word2
@@ -106,7 +106,7 @@ Item {
                         PropertyChanges {
                             target: currentWord;
                             color: "gray";
-                            //font.pixelSize: fraction * 2 // цифровые значения меняются в NumberAnimation
+                            font.pixelSize: fraction * 2 // цифровые значения меняются в NumberAnimation
                         }
                         AnchorChanges {
                             target: currentWord;
