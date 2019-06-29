@@ -127,9 +127,9 @@ Item {
                         }
                         onRunningChanged: { // сигнал, испускаемый при старте и стопе анимации
                             if (currentWord.state == "up" && !running) { // определяем окончание анимации в состояние "up"
-                                word = controller.getNextWord() // берём следующее слово
                                 previous_word1 = current_word1
                                 previous_word2 = current_word2
+                                word = controller.getNextWord() // берём следующее слово
 
                                 if(swap)
                                 {
