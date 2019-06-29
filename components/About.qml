@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Item {
-    property Item header: Component {
+    property Component header: Component {
         Rectangle {
             anchors.fill: parent
             Text {
@@ -10,7 +10,7 @@ Item {
             }
         }
     }
-    property Item body: Component {
+    property Component body: Component {
         Rectangle {
             anchors.fill: parent
             color: "yellow"

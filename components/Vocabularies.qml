@@ -13,7 +13,7 @@ Page {
 //            }
 //        }
 //    }
-    property Item body: Component {
+    property Component body: Component {
         ColumnLayout {
             anchors.fill: parent
             ListView {
