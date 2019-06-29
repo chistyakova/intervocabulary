@@ -26,7 +26,7 @@ Item {
                 delegate: Component {
                     Rectangle {
                         width: parent.width
-                        height: fraction * 2
+                        height: fraction * 3
                         RowLayout {
                             width: parent.width
                             height: parent.height
@@ -34,9 +34,16 @@ Item {
                                 Layout.fillWidth: true
                                 height: parent.height
                                 Text {
-                                    anchors.centerIn: parent
-                                    text: native_word+" - "+foreign_word
+                                    padding: fraction * 0.5
+                                    anchors.left: parent.left
+                                    text: native_word + "\n" + foreign_word
                                     font.pixelSize: fraction
+                                }
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: {
+                                        editWord.open()
+                                    }
                                 }
                             }
                             Image {

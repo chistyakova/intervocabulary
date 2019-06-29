@@ -47,7 +47,7 @@ Page {
                                 height: fraction
                                 color: "transparent"
                                 Text {
-                                    anchors.centerIn: parent
+                                    anchors.left: parent.left
                                     text: title
                                     font.pixelSize: fraction
                                 }
