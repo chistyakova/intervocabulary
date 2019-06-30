@@ -10,7 +10,6 @@ Item {
             Image {
                 id: swapWords
                 source: "qrc:/svg/swap-horizontal.svg"
-                anchors.right: parent.right
                 sourceSize.width: parent.height
                 sourceSize.height: parent.height
                 MouseArea {
@@ -23,7 +22,6 @@ Item {
             Image {
                 id: shuffleWords
                 source: "qrc:/svg/shuffle-variant.svg"
-                anchors.right: swapWords.left
                 sourceSize.width: parent.height
                 sourceSize.height: parent.height
                 MouseArea {
