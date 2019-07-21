@@ -2,33 +2,43 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
-Page {
+Item {
     property int selected_vocabulary: 0
-//    property Item header: Component {
-//        Rectangle {
-//            anchors.fill: parent
-//            Text {
-//                anchors.centerIn: parent
-//                text: "Словари"
-//            }
-//        }
-//    }
+    property Component header: Component {
+        RowLayout {
+            Layout.fillWidth: true
+            Text {
+                text: "Словари"
+                font.pixelSize: fraction
+                Layout.alignment: Qt.AlignCenter // заголовок посередине первой ячейки
+            }
+            Image {
+                Layout.alignment: Qt.AlignRight // иконка редактирования с самого правого второй края ячейки
+                source: "qrc:///svg/edit.svg"
+                sourceSize.width: fraction
+                sourceSize.height: fraction
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {}
+                }
+            }
+        }
+    }
     property Component body: Component {
         ColumnLayout {
             anchors.fill: parent
             ListView {
-                id: vocabulariesList
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 model: vocubsModel
                 delegate: Component {
                     Rectangle {
-                        width: vocabulariesList.width
+                        width: parent.width
                         height: fraction * 2
                         color: index % 2 == 0 ? "#efefef" : "#f8f8f8" // чередуем цвет полосок в ListView
                         RowLayout {
                             anchors.fill: parent
-                            Image {
+                            Image { // первая ячейка - инидкация выбранности/невыбранности словаря
                                 source: flag ? "qrc:/svg/checked.svg" : "qrc:/svg/unchecked.svg"
                                 sourceSize.width: fraction
                                 sourceSize.height: fraction
@@ -42,46 +52,19 @@ Page {
                                     }
                                 }
                             }
-                            Rectangle {
+                            MouseArea { // вторая ячейка кликабельна и содержит текст название словаря
                                 Layout.fillWidth: true
-                                height: fraction
-                                color: "transparent"
+                                Layout.fillHeight: true
+                                onClicked: {
+                                    selected_vocabulary = index
+                                    controller.getWords(
+                                                vocubsModel.get(selected_vocabulary).title)
+                                    stack.push(wordsTitleContainer)
+                                }
                                 Text {
-                                    anchors.left: parent.left
+                                    anchors.verticalCenter: parent.verticalCenter
                                     text: title
                                     font.pixelSize: fraction
-                                }
-                                MouseArea {
-                                    anchors.fill: parent
-                                    onClicked: {
-                                        selected_vocabulary = index
-                                        controller.getWords(
-                                                    vocubsModel.get(selected_vocabulary).title)
-                                        stack.push(wordsTitleContainer)
-                                    }
-                                }
-                            }
-                            Image {
-                                source: "qrc:///svg/edit.svg"
-                                sourceSize.width: fraction
-                                sourceSize.height: fraction
-                                MouseArea {
-                                    anchors.fill: parent
-                                    onClicked: {
-                                        selected_vocabulary = index
-                                        editVocub.open()
-                                    }
-                                }
-                            }
-                            Image {
-                                source: "qrc:///svg/delete.svg"
-                                sourceSize.width: fraction
-                                sourceSize.height: fraction
-                                MouseArea {
-                                    anchors.fill: parent
-                                    onPressAndHold: {
-                                        console.log("delete "+index)
-                                    }
                                 }
                             }
                         }
