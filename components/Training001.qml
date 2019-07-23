@@ -42,91 +42,61 @@ Item {
     property string previous_word1: ""
     property string previous_word2: ""
 
-
-
-//    Component.onCompleted: {
-//        var word = controller.getNextWord()
-//        if(swap)
-//        {
-//            current_word1 = word.native_word
-//            current_word2 = word.foreign_word
-//        } else {
-//            current_word1 = word.foreign_word
-//            current_word2 = word.native_word
-//        }
-//    }
+    property int max_font_size: fraction * 3
+    property var reduce_ratio: 0.5 // коэффициент уменьшения шрифта
+    property int reduced_font_size: 0 // временная переменная
 
     property Component body: Component {
         Rectangle {
             anchors.fill: parent
             color: "gainsboro"
-            Rectangle {
-                id: previousWordRectangle
+            Text {
+                id: previousWord
                 anchors.top: parent.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width * 0.62
-                height: parent.height / 2 * 0.62
-                Text {
-                    id: previousWord
-                    anchors.fill: parent
-                    font.pixelSize: fraction * 4
-                    fontSizeMode: Text.Fit
-//                    fontSizeMode: Text.HorizontalFit
-                    horizontalAlignment: Text.AlignHCenter
-                    text: previous_word1+"<br>"+previous_word2
-                    color: "gray"
-                    states: [
-                        State { name: "visible"
-                            PropertyChanges { target: previousWord; opacity: 1.0; visible: true }
-                        },
-                        State { name:"invisible"
-                            PropertyChanges { target: previousWord; opacity: 0.0 }
-                        }
-                    ]
-                    transitions: [
-                        Transition {
-                            from: "visible"
-                            to: "invisible"
-                            NumberAnimation { property: "opacity"; duration: 500}
-                        },
-                        Transition {
-                            from: "invisible"
-                            to: "visible"
-                            NumberAnimation { property: "visible"; duration: 0}
-                        }
-                    ]
-                }
-            }
-            Rectangle {
-                id: currentWordRectangle
-                anchors.top: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
-                height: parent.height/2
-                color: "yellow"
-                Text {
-                    id: currentWord
-                    anchors.fill: parent
-                    font.pixelSize: fraction * 4
-                    fontSizeMode: Text.Fit
-                    horizontalAlignment: Text.AlignHCenter
-                    text: current_word1+"<br><font color='transparent'>"+current_word2+"</font>"
-
-                }
+                fontSizeMode: Text.HorizontalFit
+                horizontalAlignment: Text.AlignHCenter
+                text: previous_word1+"<br>"+previous_word2
+                color: "gray"
+                states: [
+                    State { name: "visible"
+                        PropertyChanges { target: previousWord; opacity: 1.0; visible: true }
+                    },
+                    State { name:"invisible"
+                        PropertyChanges { target: previousWord; opacity: 0.0 }
+                    }
+                ]
+                transitions: [
+                    Transition {
+                        from: "visible"
+                        to: "invisible"
+                        NumberAnimation { property: "opacity"; duration: 500}
+                    },
+                    Transition {
+                        from: "invisible"
+                        to: "visible"
+                        NumberAnimation { property: "visible"; duration: 0}
+                    }
+                ]
+            }
+            Text {
+                id: currentWord
+                anchors.top: parent.verticalCenter
+                width: parent.width
+                font.pixelSize: max_font_size
+                fontSizeMode: Text.HorizontalFit
+                horizontalAlignment: Text.AlignHCenter
+                text: current_word1+"<br><font color='transparent'>"+current_word2+"</font>"
                 states: [
                     State {
                         name: "up";
                         PropertyChanges {
-                            //target: currentWord;
-                            target: currentWordRectangle
-//                            color: "gray";
-//                            font.pixelSize: previousWord.font.pixelSize
-                            width: parent.width * 0.62
-                            height: parent.height / 2 * 0.62
+                            target: currentWord;
+                            color: "gray";
+                            font.pixelSize: reduced_font_size // цифровые значения меняются в NumberAnimation
                         }
                         AnchorChanges {
-                            //target: currentWord;
-                            target: currentWordRectangle
+                            target: currentWord;
                             anchors.top: parent.top // выставляем новый якорь
                         }
                     }
@@ -137,15 +107,13 @@ Item {
                         SequentialAnimation {
                             PauseAnimation { duration: 500 }
                             ParallelAnimation {
-//                                ColorAnimation { duration: 500 }
+                                ColorAnimation { duration: 500 }
                                 AnchorAnimation { duration: 500 }
-//                                NumberAnimation { properties: "font.pixelSize"; duration: 500;}
-                                NumberAnimation { properties: "width"; duration: 500;}
-                                NumberAnimation { properties: "height"; duration: 500;}
+                                NumberAnimation { properties: "font.pixelSize"; duration: 500}
                             }
                         }
                         onRunningChanged: { // сигнал, испускаемый при старте и стопе анимации
-                            if (currentWordRectangle.state == "up" && !running) { // определяем окончание анимации в состояние "up"
+                            if (currentWord.state == "up" && !running) { // анимация закончилась
                                 previous_word1 = current_word1
                                 previous_word2 = current_word2
                                 word = controller.getNextWord() // берём следующее слово
@@ -159,10 +127,12 @@ Item {
                                     current_word2 = word.native_word
                                 }
 
-//                                currentWord.state = "" // возвращаем дефолтное состояние
-                                currentWordRectangle.state = ""
-                                previousWord.state = "visible"
+                                currentWord.state = "" // возвращаем дефолтное состояние
                                 currentWord.text = current_word1+"<br><font color='transparent'>"+current_word2+"</font>"
+                                currentWord.font.pixelSize = max_font_size
+
+                                previousWord.state = "visible"
+                                previousWord.font.pixelSize = reduced_font_size
                             }
                         }
                     }
@@ -172,25 +142,15 @@ Item {
                 id: clickOnScreen
                 anchors.fill: parent
                 onClicked: {
-//                    currentWord.state = "up"
-                    previousWord.state = "invisible"
+                    reduced_font_size = currentWord.fontInfo.pixelSize * reduce_ratio
+
+                    currentWord.state = "up"
                     currentWord.text = current_word1 + "\n" + current_word2
-                    currentWordRectangle.state = "up"
+                    currentWord.font.pixelSize = currentWord.fontInfo.pixelSize
+
+                    previousWord.state = "invisible"
                 }
             }
         }
-        //    Text {
-        //        text: "asasd"
-        //        anchors.right: parent.right
-        //        anchors.top: mainRectangle.top
-        //    }
-        //    Rectangle {
-        //        anchors.fill: parent.parent.parent.parent.heder
-        //        color: "red"
-        //        Text {
-        //            anchors.fill: parent
-        //            text: "aaa"
-        //        }
-        //    }
     }
 }
