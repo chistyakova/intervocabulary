@@ -38,7 +38,9 @@ Item {
                         color: index % 2 == 0 ? "#efefef" : "#f8f8f8" // чередуем цвет полосок в ListView
                         RowLayout {
                             anchors.fill: parent
-                            Image { // первая ячейка - инидкация выбранности/невыбранности словаря
+                            // Иконка "галочки" - признак выбранности/невыбранности словаря:
+                            Image {
+                                id: vocabularyCheckIcon
                                 source: flag ? "qrc:/svg/checked.svg" : "qrc:/svg/unchecked.svg"
                                 sourceSize.width: fraction
                                 sourceSize.height: fraction
@@ -52,21 +54,34 @@ Item {
                                     }
                                 }
                             }
-                            MouseArea { // вторая ячейка кликабельна и содержит текст название словаря
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                onClicked: {
-                                    selected_vocabulary = index
-                                    controller.getWords(
-                                                vocubsModel.get(selected_vocabulary).title)
-                                    stack.push(wordsTitleContainer)
-                                }
-                                Text {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    text: title
-                                    font.pixelSize: fraction
-                                }
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: title
+                                font.pixelSize: fraction
+                                anchors.left: vocabularyCheckIcon.right
                             }
+                            Image {
+                                source: "qrc:/svg/forth.svg"
+                                sourceSize.width: fraction
+                                sourceSize.height: fraction
+                                anchors.right: parent.right
+                            }
+
+//                            MouseArea { // вторая ячейка кликабельна и содержит текст название словаря
+//                                Layout.fillWidth: true
+//                                Layout.fillHeight: true
+//                                onClicked: {
+//                                    selected_vocabulary = index
+//                                    controller.getWords(
+//                                                vocubsModel.get(selected_vocabulary).title)
+//                                    stack.push(wordsTitleContainer)
+//                                }
+//                                Text {
+//                                    anchors.verticalCenter: parent.verticalCenter
+//                                    text: title
+//                                    font.pixelSize: fraction
+//                                }
+//                            }
                         }
                     }
                 }

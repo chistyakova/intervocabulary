@@ -17,5 +17,6 @@
         <file>svg/swap-horizontal.svg</file>
         <file>svg/shuffle-variant.svg</file>
         <file>components/SlideContainer.qml</file>
+        <file>svg/forth.svg</file>
     </qresource>
 </RCC>

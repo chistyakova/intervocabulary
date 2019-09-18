@@ -108,8 +108,8 @@ ApplicationWindow {
             Label {
                 width: aboutDialog.availableWidth
                 text: "In comparison to the desktop-oriented Qt Quick Controls 1, Qt Quick Controls 2 "
-                    + "are an order of magnitude simpler, lighter and faster, and are primarily targeted "
-                    + "towards embedded and mobile platforms."
+                      + "are an order of magnitude simpler, lighter and faster, and are primarily targeted "
+                      + "towards embedded and mobile platforms."
                 wrapMode: Label.Wrap
                 font.pixelSize: 12
             }
